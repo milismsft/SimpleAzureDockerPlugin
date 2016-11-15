@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AzureDockerManager/AzureDockerManager.iml" filepath="$PROJECT_DIR$/AzureDockerManager/AzureDockerManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AzureDockerOps/AzureDockerOps.iml" filepath="$PROJECT_DIR$/AzureDockerOps/AzureDockerOps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleAzureDockerPlugin.iml" filepath="$PROJECT_DIR$/SimpleAzureDockerPlugin.iml" />
+    </modules>
+  </component>
+</project>
