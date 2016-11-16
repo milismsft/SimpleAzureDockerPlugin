@@ -6,6 +6,7 @@ import com.intellij.ui.table.TableView;
 import com.intellij.ui.wizard.WizardModel;
 import com.microsoft.azure.docker.intellij.docker.ui.forms.AzureConfigureDockerContainerStep;
 import com.microsoft.azure.docker.intellij.docker.ui.forms.AzureSelectDockerHostStep;
+import com.microsoft.azure.docker.ui.AzureCreateDockerImageDescription;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
 
 import javax.swing.*;
@@ -19,10 +20,16 @@ public class AzureSelectDockerWizardModel extends WizardModel {
 
   private AzureDockerUIManager dockerUIManager;
 
+  public AzureCreateDockerImageDescription dockerImageDescription;
+
   public AzureSelectDockerWizardModel(final Project project, AzureDockerUIManager uiManager) {
     super("Azure Docker Deployment");
     this.project = project;
     this.dockerUIManager = uiManager;
+    dockerImageDescription = new AzureCreateDockerImageDescription();
+    dockerImageDescription.dockerImageName = dockerUIManager.getDefaultDockerImageName(project.getName());
+    dockerImageDescription.dockerContainerName = dockerUIManager.getDefaultDockerContainerName(dockerImageDescription.dockerImageName);
+    dockerImageDescription.artifactName = dockerUIManager.getDefaultArtifactName(project.getName());
 
     selectDockerHostForm = new AzureSelectDockerHostStep(this.getTitle(), this);
     configureDockerContainerForm = new AzureConfigureDockerContainerStep(this.getTitle(), this);

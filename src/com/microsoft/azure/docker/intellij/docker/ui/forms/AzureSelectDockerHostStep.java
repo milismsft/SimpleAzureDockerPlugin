@@ -12,6 +12,7 @@ import com.intellij.ui.wizard.WizardStep;
 import com.microsoft.azure.docker.intellij.docker.ui.AzureSelectDockerWizardModel;
 import com.microsoft.azure.docker.intellij.docker.ui.AzureSelectDockerWizardStep;
 import com.microsoft.azure.docker.resources.DockerHost;
+import com.microsoft.azure.docker.ui.AzureCreateDockerImageDescription;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
 import com.microsoft.intellij.ui.util.UIUtils;
 import com.microsoft.intellij.util.PluginUtil;
@@ -21,6 +22,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.util.Random;
 import java.util.Vector;
 
 public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
@@ -44,12 +46,14 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
     this.dockerUIManager = model.getDockerUIManager();
     this.dockerHostsTableSelection = null;
 
-    Project project = model.getProject();
-    project.getProjectFilePath();
+    String defaultImageName = model.dockerImageDescription.dockerImageName;
+    String defaultArtifactName = model.dockerImageDescription.artifactName;
+
+    dockerImageName.setText(defaultImageName);
 
     artifactPath.addActionListener(UIUtils.createFileChooserListener(artifactPath, model.getProject(),
-        FileChooserDescriptorFactory.createSingleFolderDescriptor()));
-    artifactPath.setText(model.getProject().getBasePath());
+        FileChooserDescriptorFactory.createSingleLocalFileDescriptor()));
+    artifactPath.setText(model.getProject().getBasePath() + "/out/Docker/"+ defaultArtifactName);
 
     forceRefreshDockerHostsTable();
 
@@ -96,8 +100,8 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
         currentSelection.row = dockerHostsTable.getSelectedRow();
 
         if (currentSelection.column == 0) {
-          DefaultTableModel model = (DefaultTableModel) dockerHostsTable.getModel();
-          if ((Boolean) model.getValueAt(currentSelection.row, currentSelection.column)) {
+          DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
+          if ((Boolean) tableModel.getValueAt(currentSelection.row, currentSelection.column)) {
             if (dockerHostsTableSelection == null) {
               dockerHostsTableSelection = currentSelection;
             } else {
@@ -105,7 +109,7 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
               dockerHostsTableSelection = null;
               if (currentSelection.row != oldRow) {
                 // disable previous selection
-                model.setValueAt(false, oldRow, 0);
+                tableModel.setValueAt(false, oldRow, 0);
                 dockerHostsTableSelection = currentSelection;
               }
             }
@@ -180,10 +184,10 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
    *
    */
   void refreshDockerHostsTable() {
-    final DefaultTableModel model = (DefaultTableModel) dockerHostsTable.getModel();
+    final DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
 
-    while (model.getRowCount() > 0) {
-      model.removeRow(0);
+    while (tableModel.getRowCount() > 0) {
+      tableModel.removeRow(0);
     }
 
     try {
@@ -195,7 +199,7 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
           row.add(host.state.toString());
           row.add(host.hostOSType.toString());
           row.add(host.apiUrl);
-          model.addRow(row);
+          tableModel.addRow(row);
         }
       }
     } catch (Exception e) {
@@ -207,13 +211,19 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   @Override
   public ValidationInfo doValidate() {
     if (dockerImageName.getText() == null || dockerImageName.getText().equals("")){
-      ValidationInfo info = new ValidationInfo("Missing Docker image name", dockerImageName);
+      ValidationInfo info = new ValidationInfo("Please name your Docker image", dockerImageName);
+      model.getSelectDockerWizardDialog().DialogShaker(info);
+      return info;
+    }
+
+    if (artifactPath.getText() == null || artifactPath.getText().equals("")){
+      ValidationInfo info = new ValidationInfo("Please select the artifact to be published", artifactPath);
       model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
 
     if (dockerHostsTableSelection == null){
-      ValidationInfo info = new ValidationInfo("Missing Docker image name", dockerImageName);
+      ValidationInfo info = new ValidationInfo("Please select a Docker host", dockerHostsTable);
       model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
@@ -230,6 +240,14 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   @Override
   public WizardStep onNext(final AzureSelectDockerWizardModel model) {
     if (doValidate() == null) {
+      DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
+      String apiURL = (String) tableModel.getValueAt(dockerHostsTable.getSelectedRow(), 4);
+      model.dockerImageDescription.host = dockerUIManager.getDockerHostForURL(apiURL);
+      model.dockerImageDescription.dockerImageName = dockerImageName.getText();
+      model.dockerImageDescription.artifactName = artifactPath.getText();
+      model.dockerImageDescription.hasRunConfiguration = createRunConfigurationCheckBox.isSelected();
+      model.dockerImageDescription.hasDebugConfiguration = createDebugConfigurationCheckBox.isSelected();
+
       return super.onNext(model);
     } else {
       return this;

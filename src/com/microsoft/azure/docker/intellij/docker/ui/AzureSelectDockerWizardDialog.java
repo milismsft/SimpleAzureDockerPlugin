@@ -28,13 +28,13 @@ public class AzureSelectDockerWizardDialog extends WizardDialog<AzureSelectDocke
 
   @Override
   protected Dimension getWindowPreferredSize() {
-    return new Dimension(600, 600);
+    return new Dimension(600, 400);
   }
 
   @Nullable
   @Override
   protected ValidationInfo doValidate() {
-    return myModel.doValidate();
+    return model.doValidate();
   }
 
   @Override

@@ -1,39 +1,37 @@
 package com.microsoft.azure.docker.resources;
 
 import static com.microsoft.azure.docker.resources.KnownDockerImages.KnownDefaultDockerfiles.JBOSS_WILDFLY_DEFAULT_DOCKERFILE;
+import static com.microsoft.azure.docker.resources.KnownDockerImages.KnownDefaultDockerfiles.TOMCAT8_DEFAULT_DOCKERFILE;
 
 public enum KnownDockerImages {
 
-  JBOSS_WILDFLY(JBOSS_WILDFLY_DEFAULT_DOCKERFILE);
+  JBOSS_WILDFLY("JBoss WildFly", JBOSS_WILDFLY_DEFAULT_DOCKERFILE, "18080:80"),
+  TOMCAT8("tomcat:8.0.20-jre8", TOMCAT8_DEFAULT_DOCKERFILE, "18080:80");
 
   private final String dockerfileContent;
+  private final String name;
+  private final String portSettings;
 
-  KnownDockerImages(String dockerfile) {
-    this.dockerfileContent = dockerfile;
+  KnownDockerImages(String name, String dockerFile, String defaultPortSettings) {
+    this.dockerfileContent = dockerFile;
+    this.name = name;
+    this.portSettings = defaultPortSettings;
   }
 
-  /*
-  public static final Map<String, DockerImage> defaultImages;
-  static {
-    Map<String, DockerImage> tempMap = new HashMap<>();
-    tempMap.put("WildFly", new DockerImage("defaultWildFly",
-        "FROM jboss/wildfly\n" +
-            "ADD ArtifactApp.war /opt/jboss/wildfly/standalone/deployments/\n",
-        "8080:8080",
-        "ArtifactApp.war"));
-    tempMap.put("Tomcat8", new DockerImage("defaultTomcat8",
-        "FROM tomcat:8.0.20-jre8\n" +
-            "ADD ArtifactApp.war /usr/local/tomcat/webapps/\n",
-        "8080:8080",
-        "ArtifactApp.war"));
-    defaultImages = tempMap;
+  public String toString(){
+    return name;
   }
-  */
+
+  public String getPortSettings() {return portSettings;}
+  public String getDockerfileContent() {return  dockerfileContent;}
+
   public static class KnownDefaultDockerfiles {
     public static final String JBOSS_WILDFLY_DEFAULT_DOCKERFILE =
         "FROM jboss/wildfly\n" +
-        "ADD ArtifactApp.war /opt/jboss/wildfly/standalone/deployments/\n";
-
+        "ADD _MyArtifact.war_ /opt/jboss/wildfly/standalone/deployments/\n";
+    public static final String TOMCAT8_DEFAULT_DOCKERFILE =
+        "FROM tomcat:8.0.20-jre8\n" +
+        "ADD _MyArtifact.war_ /usr/local/tomcat/webapps/\n";
   }
 }
 
