@@ -63,7 +63,7 @@ public class AzureDockerUIManager {
   }
 
   public String getDefaultDockerContainerName(String imageName) {
-    return String.format("%s%d", imageName, new Random().nextInt(10000));
+    return String.format("%s-%d", imageName, new Random().nextInt(10000));
   }
 
   public String getDefaultArtifactName(String projectName) {

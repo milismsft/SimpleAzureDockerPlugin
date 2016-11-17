@@ -29,7 +29,7 @@ public class AzureNewDockerWizardDialog extends WizardDialog<AzureNewDockerWizar
   @Nullable
   @Override
   protected ValidationInfo doValidate() {
-    return myModel.doValidate();
+    return model.doValidate();
   }
 
   @Override

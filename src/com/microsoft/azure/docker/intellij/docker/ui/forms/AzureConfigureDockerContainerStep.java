@@ -13,6 +13,8 @@ import com.microsoft.intellij.ui.util.UIUtils;
 import com.microsoft.intellij.util.PluginUtil;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Files;
@@ -46,13 +48,17 @@ public class AzureConfigureDockerContainerStep extends AzureSelectDockerWizardSt
     predefinedDockerfileRadioButton.setSelected(true);
     dockerfileComboBox.setEnabled(true);
 
-    for (KnownDockerImages image : model.getDockerUIManager().getDefaultDockerImages()) {
+    for (KnownDockerImages image : dockerUIManager.getDefaultDockerImages()) {
       dockerfileComboBox.addItem(image);
     }
+
+    dockerContainerName.getDocument().addDocumentListener(getOnFinishDocumentListener());
 
     customDockerfileBrowseButton.setEnabled(false);
     customDockerfileBrowseButton.addActionListener(UIUtils.createFileChooserListener(customDockerfileBrowseButton, model.getProject(),
         FileChooserDescriptorFactory.createSingleLocalFileDescriptor()));
+    customDockerfileBrowseButton.getTextField().getDocument().addDocumentListener(getOnFinishDocumentListener());
+
     customDockerfileBrowseButton.setText("");
 
     predefinedDockerfileRadioButton.addActionListener(new ActionListener() {
@@ -60,6 +66,7 @@ public class AzureConfigureDockerContainerStep extends AzureSelectDockerWizardSt
       public void actionPerformed(ActionEvent e) {
         dockerfileComboBox.setEnabled(true);
         customDockerfileBrowseButton.setEnabled(false);
+        setFinishButtonState();
       }
     });
 
@@ -68,23 +75,30 @@ public class AzureConfigureDockerContainerStep extends AzureSelectDockerWizardSt
       public void actionPerformed(ActionEvent e) {
         dockerfileComboBox.setEnabled(false);
         customDockerfileBrowseButton.setEnabled(true);
+        setFinishButtonState();
       }
     });
 
     dockerContainerPortSettings.setText("18080:80");
+    dockerContainerPortSettings.getDocument().addDocumentListener(getOnFinishDocumentListener());
   }
 
   @Override
   public ValidationInfo doValidate() {
+    setFinishButtonState();
+    return doValidate(true);
+  }
+
+  private ValidationInfo doValidate(Boolean shakeOnError) {
     if (dockerContainerName.getText() == null || dockerContainerName.getText().equals("")){
       ValidationInfo info = new ValidationInfo("Please name your Docker container", dockerContainerName);
-      model.getSelectDockerWizardDialog().DialogShaker(info);
+      if (shakeOnError) model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
 
     if (predefinedDockerfileRadioButton.isSelected() && dockerfileComboBox.getSelectedItem() == null){
       ValidationInfo info = new ValidationInfo("Please select a Docker image type form the list", dockerfileComboBox);
-      model.getSelectDockerWizardDialog().DialogShaker(info);
+      if (shakeOnError) model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
 
@@ -92,22 +106,47 @@ public class AzureConfigureDockerContainerStep extends AzureSelectDockerWizardSt
     if (customDockerfileRadioButton.isSelected() &&
         (dockerfileName == null || dockerfileName.equals("") || Files.notExists(Paths.get(dockerfileName)))){
       ValidationInfo info = new ValidationInfo("Please input a valid Dockerfile", customDockerfileBrowseButton);
-      model.getSelectDockerWizardDialog().DialogShaker(info);
+      if (shakeOnError) model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
 
     if (dockerContainerPortSettings.getText() == null || dockerContainerPortSettings.getText().equals("")){
       ValidationInfo info = new ValidationInfo("Please name your Docker container", dockerContainerPortSettings);
-      model.getSelectDockerWizardDialog().DialogShaker(info);
+      if (shakeOnError) model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
 
     return null;
   }
 
+  private void setFinishButtonState() {
+    model.getCurrentNavigationState().FINISH.setEnabled(doValidate(false) == null);
+  }
+
+  private DocumentListener getOnFinishDocumentListener() {
+    return new DocumentListener() {
+      @Override
+      public void insertUpdate(DocumentEvent e) {
+        setFinishButtonState();
+      }
+
+      @Override
+      public void removeUpdate(DocumentEvent e) {
+        setFinishButtonState();
+      }
+
+      @Override
+      public void changedUpdate(DocumentEvent e) {
+        setFinishButtonState();
+      }
+    };
+  }
+
   @Override
   public JComponent prepare(final WizardNavigationState state) {
     rootConfigureContainerPanel.revalidate();
+    setFinishButtonState();
+
     return rootConfigureContainerPanel;
   }
 
@@ -122,27 +161,26 @@ public class AzureConfigureDockerContainerStep extends AzureSelectDockerWizardSt
 
   @Override
   public boolean onFinish() {
-//    if (doValidate() == null) {
-//      model.dockerImageDescription.dockerContainerName = dockerContainerName.getText();
-//      model.dockerImageDescription.dockerPortSettings = dockerContainerPortSettings.getText();
-//      if (predefinedDockerfileRadioButton.isSelected()) {
-//        model.dockerImageDescription.dockerfileContent = ((KnownDockerImages) dockerfileComboBox.getSelectedItem()).getDockerfileContent();
-//      } else if (customDockerfileRadioButton.isSelected()) {
-//        try {
-//          model.dockerImageDescription.dockerfileContent = new String(Files.readAllBytes(Paths.get(customDockerfileBrowseButton.getText())));
-//        } catch (Exception e) {
-//          String msg = "An error occurred while attempting to get the content of " + customDockerfileBrowseButton.getText() + " .\n" + e.getMessage();
-//          PluginUtil.displayErrorDialogAndLog("Error", msg, e);
-//
-//          return false;
-//        }
-//      }
-//
-//      return super.onFinish();
-//    } else {
-//      return false;
-//    }
-    return false;
+    if (doValidate(false) == null) {
+      model.dockerImageDescription.dockerContainerName = dockerContainerName.getText();
+      model.dockerImageDescription.dockerPortSettings = dockerContainerPortSettings.getText();
+      if (predefinedDockerfileRadioButton.isSelected()) {
+        model.dockerImageDescription.dockerfileContent = ((KnownDockerImages) dockerfileComboBox.getSelectedItem()).getDockerfileContent();
+      } else if (customDockerfileRadioButton.isSelected()) {
+        try {
+          model.dockerImageDescription.dockerfileContent = new String(Files.readAllBytes(Paths.get(customDockerfileBrowseButton.getText())));
+        } catch (Exception e) {
+          String msg = "An error occurred while attempting to get the content of " + customDockerfileBrowseButton.getText() + " .\n" + e.getMessage();
+          PluginUtil.displayErrorDialogAndLog("Error", msg, e);
+
+          return false;
+        }
+      }
+
+      return super.onFinish();
+    } else {
+      return false;
+    }
   }
 
 }

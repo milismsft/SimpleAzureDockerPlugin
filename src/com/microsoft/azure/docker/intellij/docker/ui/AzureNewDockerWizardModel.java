@@ -25,7 +25,13 @@ public class AzureNewDockerWizardModel extends WizardModel {
   }
 
   public ValidationInfo doValidate() {
-    return ((AzureSelectDockerWizardStep) getCurrentStep()).doValidate();
+    return ((AzureNewDockerWizardStep) getCurrentStep()).doValidate();
   }
+
+  @Override
+  public boolean isDone() {
+    return super.isDone();
+  }
+
 
 }
