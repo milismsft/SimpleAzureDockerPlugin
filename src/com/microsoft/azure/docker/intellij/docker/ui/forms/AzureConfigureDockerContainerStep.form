@@ -13,7 +13,7 @@
           <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Docker Container Name:"/>
+          <text value="Docker container name:"/>
         </properties>
       </component>
       <vspacer id="db220">
@@ -34,7 +34,7 @@
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Select a predefined Docker Image"/>
+              <text value="Select a predefined Docker image"/>
             </properties>
           </component>
           <vspacer id="af93d">
@@ -52,7 +52,7 @@
           </component>
           <component id="bb9fe" class="javax.swing.JComboBox" binding="dockerfileComboBox">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="1" use-parent-layout="false"/>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="3" use-parent-layout="false"/>
             </constraints>
             <properties>
               <model/>
@@ -60,7 +60,7 @@
           </component>
           <component id="6a31f" class="com.intellij.openapi.ui.TextFieldWithBrowseButton" binding="customDockerfileBrowseButton">
             <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="3" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
@@ -71,12 +71,12 @@
           <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Docker Container Port Settings:"/>
+          <text value="Docker container port settings:"/>
         </properties>
       </component>
       <component id="4ca9b" class="javax.swing.JTextField" binding="dockerContainerName">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="2" use-parent-layout="false">
+          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -84,7 +84,7 @@
       </component>
       <component id="4b222" class="javax.swing.JTextField" binding="dockerContainerPortSettings">
         <constraints>
-          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="2" use-parent-layout="false">
+          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -92,7 +92,7 @@
       </component>
       <component id="71338" class="javax.swing.JLabel">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="i.e.: &quot;10022:22/tcp&quot;"/>

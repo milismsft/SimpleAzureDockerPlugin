@@ -2,17 +2,14 @@ package com.microsoft.azure.docker.intellij.docker.ui.forms;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.ui.*;
 import com.intellij.ui.table.JBTable;
 import com.intellij.ui.wizard.WizardNavigationState;
 import com.intellij.ui.wizard.WizardStep;
-import com.microsoft.azure.docker.intellij.docker.ui.AzureSelectDockerWizardModel;
-import com.microsoft.azure.docker.intellij.docker.ui.AzureSelectDockerWizardStep;
+import com.microsoft.azure.docker.intellij.docker.ui.*;
 import com.microsoft.azure.docker.resources.DockerHost;
-import com.microsoft.azure.docker.ui.AzureCreateDockerImageDescription;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
 import com.microsoft.intellij.ui.util.UIUtils;
 import com.microsoft.intellij.util.PluginUtil;
@@ -22,7 +19,6 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.util.Random;
 import java.util.Vector;
 
 public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
@@ -122,17 +118,17 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
         .setAddAction(new AnActionButtonRunnable() {
           @Override
           public void run(AnActionButton button) {
-//            addBtnListener();
+            onAddNewDockerHostAction();
           }
         }).setEditAction(new AnActionButtonRunnable() {
           @Override
           public void run(AnActionButton anActionButton) {
-//            editBtnListener();
+            onEditDockerHostAction();
           }
         }).setRemoveAction(new AnActionButtonRunnable() {
           @Override
           public void run(AnActionButton button) {
-//            removeBtnListener();
+            onRemoveDockerHostAction();
           }
         }).setEditActionUpdater(new AnActionButtonUpdater() {
           @Override
@@ -148,7 +144,32 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   }
 
   private void onAddNewDockerHostAction() {
+    AzureNewDockerWizardModel newDockerHostModel = new AzureNewDockerWizardModel(model.getProject(), dockerUIManager);
+    AzureNewDockerWizardDialog wizard = new AzureNewDockerWizardDialog(newDockerHostModel);
+    wizard.setTitle("Create a new Docker VM");
+    wizard.show();
 
+    if (wizard.getExitCode() == 0) {
+      dockerHostsTable.setEnabled(false);
+
+      DockerHost host = newDockerHostModel.dockerHostDescription;
+      host = dockerUIManager.createNewFakeDockerHost("myNewHost");
+      model.dockerImageDescription.host = host;
+      model.dockerImageDescription.hasNewDockerHost = true;
+
+      final DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
+      Vector<Object> row = new Vector<Object>();
+      row.add(false);
+      row.add(host.name);
+      row.add("NEW-AZURE-VM");
+      row.add(host.hostOSType.toString());
+      row.add(host.apiUrl);
+      tableModel.insertRow(0, row);
+      if (dockerHostsTableSelection != null && (Boolean) tableModel.getValueAt(dockerHostsTableSelection.row, 0)) {
+        tableModel.setValueAt(false, dockerHostsTableSelection.row, 0);
+      }
+      tableModel.setValueAt(true, 0, 0);
+    }
   }
 
   private void onEditDockerHostAction() {
@@ -222,7 +243,7 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
       return info;
     }
 
-    if (dockerHostsTableSelection == null){
+    if (dockerHostsTableSelection == null && !model.dockerImageDescription.hasNewDockerHost){
       ValidationInfo info = new ValidationInfo("Please select a Docker host", dockerHostsTable);
       model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
@@ -240,13 +261,17 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   @Override
   public WizardStep onNext(final AzureSelectDockerWizardModel model) {
     if (doValidate() == null) {
-      DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
-      String apiURL = (String) tableModel.getValueAt(dockerHostsTable.getSelectedRow(), 4);
-      model.dockerImageDescription.host = dockerUIManager.getDockerHostForURL(apiURL);
-      model.dockerImageDescription.dockerImageName = dockerImageName.getText();
-      model.dockerImageDescription.artifactName = artifactPath.getText();
-      model.dockerImageDescription.hasRunConfiguration = createRunConfigurationCheckBox.isSelected();
-      model.dockerImageDescription.hasDebugConfiguration = createDebugConfigurationCheckBox.isSelected();
+      try {
+        if (!model.dockerImageDescription.hasNewDockerHost) {
+          DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
+          String apiURL = (String) tableModel.getValueAt(dockerHostsTableSelection.row, 4);
+          model.dockerImageDescription.host = dockerUIManager.getDockerHostForURL(apiURL);
+        }
+        model.dockerImageDescription.dockerImageName = dockerImageName.getText();
+        model.dockerImageDescription.artifactName = artifactPath.getText();
+        model.dockerImageDescription.hasRunConfiguration = createRunConfigurationCheckBox.isSelected();
+        model.dockerImageDescription.hasDebugConfiguration = createDebugConfigurationCheckBox.isSelected();
+      } catch (Exception e) {}
 
       return super.onNext(model);
     } else {

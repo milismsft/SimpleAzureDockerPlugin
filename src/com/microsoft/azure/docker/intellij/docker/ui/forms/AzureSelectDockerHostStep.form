@@ -13,7 +13,7 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Docker Image Name:"/>
+          <text value="Docker image name:"/>
         </properties>
       </component>
       <component id="9cdec" class="javax.swing.JLabel">
@@ -52,7 +52,7 @@
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Create Run Configuration"/>
+          <text value="Create a Run configuration"/>
         </properties>
       </component>
       <component id="3c602" class="javax.swing.JCheckBox" binding="createDebugConfigurationCheckBox" default-binding="true">
@@ -60,7 +60,7 @@
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Create Debug Configuration"/>
+          <text value="Create a Debug configuration"/>
         </properties>
       </component>
       <vspacer id="d8578">
