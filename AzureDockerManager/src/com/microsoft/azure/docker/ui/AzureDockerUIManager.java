@@ -15,6 +15,12 @@ public class AzureDockerUIManager {
 
   public List<DockerHost> dockerHostsList;
 
+  public AzureDockerUIManager() {
+    // TODO: make this the real thing
+    dockerHostsList = createNewFakeDockerHostList();
+    subscriptionList = createNewFakeSubscriptionList();
+  }
+
   public List<KnownDockerImages> getDefaultDockerImages() {
     List<KnownDockerImages> dockerImagesList = new ArrayList<>();
     dockerImagesList.add(KnownDockerImages.JBOSS_WILDFLY);
@@ -52,6 +58,17 @@ public class AzureDockerUIManager {
     dockerHostsList = hosts;
 
     return hosts;
+  }
+
+  public List<AzureDockerSubscription> createNewFakeSubscriptionList() {
+    List<AzureDockerSubscription> subscriptionList = new ArrayList<>();
+
+
+    return subscriptionList;
+  }
+
+  public String getDefaultDockerHostName() {
+    return String.format("%s%d", "mydocker", new Random().nextInt(1000000));
   }
 
   public String getDefaultName(String projectName) {

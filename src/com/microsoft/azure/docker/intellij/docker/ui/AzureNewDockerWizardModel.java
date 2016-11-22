@@ -5,9 +5,7 @@ import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.ui.wizard.WizardModel;
 import com.microsoft.azure.docker.intellij.docker.ui.forms.AzureNewDockerHostStep;
 import com.microsoft.azure.docker.intellij.docker.ui.forms.AzureNewDockerLoginStep;
-import com.microsoft.azure.docker.intellij.docker.ui.forms.AzureNewDockerVMSettingStep;
 import com.microsoft.azure.docker.resources.DockerHost;
-import com.microsoft.azure.docker.ui.AzureCreateDockerImageDescription;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
 
 public class AzureNewDockerWizardModel extends WizardModel {
@@ -17,7 +15,6 @@ public class AzureNewDockerWizardModel extends WizardModel {
 
   private AzureNewDockerHostStep newDockerHostStep;
   private AzureNewDockerLoginStep newDockerLoginStep;
-  private AzureNewDockerVMSettingStep newDockerVMSettingStep;
   private AzureNewDockerWizardDialog newDockerWizardDialog;
 
   private AzureDockerUIManager dockerUIManager;
@@ -32,10 +29,8 @@ public class AzureNewDockerWizardModel extends WizardModel {
 
     newDockerHostStep = new AzureNewDockerHostStep(this.getTitle(), this);
     newDockerLoginStep = new AzureNewDockerLoginStep(this.getTitle(), this);
-    newDockerVMSettingStep = new AzureNewDockerVMSettingStep(this.getTitle(), this);
     add(newDockerHostStep);
     add(newDockerLoginStep);
-    add(newDockerVMSettingStep);
   }
 
   public Project getProject() {

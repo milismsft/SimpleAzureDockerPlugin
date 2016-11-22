@@ -9,5 +9,5 @@ public class AzureDockerSubscription {
   public String id;
   public Azure azureClient;
   public List<String> locations;
-  public Boolean isSelected;
+  public boolean isSelected;
 }

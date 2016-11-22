@@ -9,11 +9,11 @@ public class DockerHost {
   public AzureDockerCertVault certVault;
   public String apiUrl;
   public String port;
-  public Boolean hasReleaseConfig;
-  public Boolean hasDebugConfig;
+  public boolean hasReleaseConfig;
+  public boolean hasDebugConfig;
   public AzureDockerVM hostVM;
   public List<DockerImage> dockerImages;
-  public Boolean isTLSSecured;
+  public boolean isTLSSecured;
   public DockerHostOSType hostOSType;
   public Session session;
   public DockerHostVMState state;

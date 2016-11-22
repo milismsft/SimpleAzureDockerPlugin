@@ -14,10 +14,25 @@ public class AzureNewDockerHostStep extends AzureNewDockerWizardStep {
   private JTextField dockerHostNameTextField;
   private JComboBox dockerSubscriptionComboBox;
   private JComboBox dockerLocationComboBox;
-  private JRadioButton createANewStorageRadioButton;
-  private JRadioButton selectAnExistingStorageRadioButton;
+  private ButtonGroup dockerHostStorageGroup;
+  private JRadioButton dockerHostNewStorageRadioButton;
+  private JRadioButton dockerHostSelectStorageRadioButton;
   private JComboBox dockerSelectStorageComboBox;
   private JTextField dockerNewStorageTextField;
+  private JTabbedPane tabbedPane1;
+  private JComboBox dockerHostOSTypeComboBox;
+  private JComboBox dockerHostVMSizeComboBox;
+  private JComboBox dockerHostSelectRGComboBox;
+  private JTextField dockerHostRGTextField;
+  private ButtonGroup dockerHostVnetGroup;
+  private JRadioButton dockerHostNewVNetRadioButton;
+  private JRadioButton dockerHostSelectVNetRadioButton;
+  private JComboBox dockerHostSelectVnetComboBox;
+  private JComboBox dockerHostSelectSubnetComboBox;
+  private JTextField dockerHostNewVNetTextField;
+  private ButtonGroup dockerHostRGGroup;
+  private JRadioButton dockerHostNewRGRadioButton;
+  private JRadioButton dockerHostSelectRGRadioButton;
 
   private AzureNewDockerWizardModel model;
   private AzureDockerUIManager dockerUIManager;
@@ -27,6 +42,20 @@ public class AzureNewDockerHostStep extends AzureNewDockerWizardStep {
     super(title, "Configure the Docker VM to be created");
     this.model = model;
     this.dockerUIManager = model.getDockerUIManager();
+
+    dockerHostStorageGroup = new ButtonGroup();
+    dockerHostStorageGroup.add(dockerHostNewStorageRadioButton);
+    dockerHostStorageGroup.add(dockerHostSelectStorageRadioButton);
+
+    dockerHostVnetGroup = new ButtonGroup();
+    dockerHostVnetGroup.add(dockerHostNewVNetRadioButton);
+    dockerHostVnetGroup.add(dockerHostSelectVNetRadioButton);
+
+    dockerHostRGGroup = new ButtonGroup();
+    dockerHostRGGroup.add(dockerHostNewRGRadioButton);
+    dockerHostRGGroup.add(dockerHostSelectRGRadioButton);
+
+    dockerHostNameTextField.setText(dockerUIManager.getDefaultDockerHostName());
   }
 
   @Override

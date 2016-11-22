@@ -3,9 +3,9 @@ package com.microsoft.azure.docker.ui;
 import com.microsoft.azure.docker.resources.DockerHost;
 
 public class AzureCreateDockerImageDescription {
-  public Boolean hasNewDockerHost;
-  public Boolean hasRunConfiguration;
-  public Boolean hasDebugConfiguration;
+  public boolean hasNewDockerHost;
+  public boolean hasRunConfiguration;
+  public boolean hasDebugConfiguration;
   public DockerHost host;
   public String dockerImageName;
   public String artifactName;
