@@ -137,8 +137,6 @@ public class AzureDockerVMOps {
     dockerHost.apiUrl = hostVM.dnsName;
     dockerHost.isTLSSecured = certVault.tlsServerCert != null && !certVault.tlsServerCert.isEmpty();
     dockerHost.port = (hostVM.tags != null) ? hostVM.tags.get("port") : (dockerHost.isTLSSecured) ? DOCKER_API_PORT_TLS_ENABLED : DOCKER_API_PORT_TLS_DISABLED;
-    dockerHost.hasDebugConfig = false;
-    dockerHost.hasReleaseConfig = false;
     dockerHost.hostVM = hostVM;
     dockerHost.dockerImages = new ArrayList<DockerImage>();
 

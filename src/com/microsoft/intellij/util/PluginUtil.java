@@ -1,5 +1,11 @@
 package com.microsoft.intellij.util;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogEarthquakeShaker;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.ValidationInfo;
+import com.intellij.openapi.wm.IdeFocusManager;
+
 import javax.swing.*;
 import java.util.Enumeration;
 import java.util.logging.Level;
@@ -61,4 +67,13 @@ public class PluginUtil {
       }
     }
   }
+
+  public static void DialogShaker(ValidationInfo info, DialogWrapper dialogWrapper) {
+    if(info.component != null && info.component.isVisible()) {
+      IdeFocusManager.getInstance((Project)null).requestFocus(info.component, true);
+    }
+
+    DialogEarthquakeShaker.shake(dialogWrapper.getPeer().getWindow());
+  }
+
 }

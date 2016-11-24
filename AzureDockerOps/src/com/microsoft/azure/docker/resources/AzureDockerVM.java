@@ -14,6 +14,7 @@ public class AzureDockerVM {
   public String publicIp;
   public String dnsName;
   public String storageAccountName;
+  public String storageAccountType;
   public String osDiskName;
   public AzureOSHost osHost;
   public Map<String, String> tags;

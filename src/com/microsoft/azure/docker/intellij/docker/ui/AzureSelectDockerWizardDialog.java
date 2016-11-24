@@ -46,12 +46,7 @@ public class AzureSelectDockerWizardDialog extends WizardDialog<AzureSelectDocke
   }
 
   public void DialogShaker(ValidationInfo info) {
-    if(info.component != null && info.component.isVisible()) {
-      IdeFocusManager.getInstance((Project)null).requestFocus(info.component, true);
-    }
-
-    DialogEarthquakeShaker.shake(getPeer().getWindow());
-
+    PluginUtil.DialogShaker(info, this);
   }
 
   /**

@@ -1,6 +1,7 @@
 package com.microsoft.azure.docker.ui;
 
 import com.microsoft.azure.docker.resources.AzureDockerSubscription;
+import com.microsoft.azure.docker.resources.AzureDockerVM;
 import com.microsoft.azure.docker.resources.DockerHost;
 import com.microsoft.azure.docker.resources.KnownDockerImages;
 import com.microsoft.azure.management.Azure;
@@ -16,8 +17,19 @@ public class AzureDockerUIManager {
   public List<DockerHost> dockerHostsList;
 
   public AzureDockerUIManager() {
-    // TODO: make this the real thing
+    forceRefreshSubscriptionList();
+    forceRefreshDockerHostsList();
+  }
+
+  public void forceRefreshDockerHostsList() {
+    // call into Ops to retrieve the latest list of Docker VMs
+    // TODO: make the real thing happen here
+
     dockerHostsList = createNewFakeDockerHostList();
+  }
+
+  public void forceRefreshSubscriptionList() {
+    // TODO: make the real thing happen here
     subscriptionList = createNewFakeSubscriptionList();
   }
 
@@ -45,6 +57,9 @@ public class AzureDockerUIManager {
     host.isTLSSecured = false;
     host.state = DockerHost.DockerHostVMState.ACTIVE;
     host.hostOSType = DockerHost.DockerHostOSType.UBUNTU_SERVER_16;
+    host.hostVM = new AzureDockerVM();
+    host.hostVM.name = name;
+    host.hostVM.region = "centralus";
 
     return host;
   }

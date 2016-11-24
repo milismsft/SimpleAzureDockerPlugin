@@ -9,8 +9,10 @@ import com.intellij.ui.table.JBTable;
 import com.intellij.ui.wizard.WizardNavigationState;
 import com.intellij.ui.wizard.WizardStep;
 import com.microsoft.azure.docker.intellij.docker.ui.*;
+import com.microsoft.azure.docker.intellij.docker.ui.dialogs.AzureEditDockerDialog;
 import com.microsoft.azure.docker.resources.DockerHost;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
+import com.microsoft.azure.docker.ui.EditableDockerHost;
 import com.microsoft.intellij.ui.util.UIUtils;
 import com.microsoft.intellij.util.PluginUtil;
 
@@ -22,7 +24,6 @@ import javax.swing.table.TableColumn;
 import java.util.Vector;
 
 public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
-  private AzureSelectDockerWizardModel model;
   private JPanel rootSelectHostPanel;
   private JTextField dockerImageName;
   private JCheckBox createRunConfigurationCheckBox;
@@ -31,6 +32,7 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   private TextFieldWithBrowseButton artifactPath;
   private JBTable dockerHostsTable;
 
+  private AzureSelectDockerWizardModel model;
   private AzureDockerUIManager dockerUIManager;
   private DockerHostsTableSelection dockerHostsTableSelection;
 
@@ -173,7 +175,24 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   }
 
   private void onEditDockerHostAction() {
+    try {
+      DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
+      String apiURL = (String) tableModel.getValueAt(dockerHostsTable.getSelectedRow(), 4);
 
+      PluginUtil.displayInfoDialog("Selected host", apiURL);
+
+      EditableDockerHost editableDockerHost = new EditableDockerHost(dockerUIManager.getDockerHostForURL(apiURL));
+
+      AzureEditDockerDialog editDockerDialog = new AzureEditDockerDialog(model.getProject(), editableDockerHost);
+      editDockerDialog.show();
+
+      if (editDockerDialog.getExitCode() == 0) {
+        forceRefreshDockerHostsTable();
+      }
+    } catch (Exception e) {
+      String msg = "An error occurred while attempting to edit selected Docker hosts.\n" + e.getMessage();
+      PluginUtil.displayErrorDialogAndLog("Error", msg, e);
+    }
   }
 
   private void onRemoveDockerHostAction() {
@@ -184,11 +203,7 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
    *   This call will retrieve the latest list of VMs form Azure suitable to be a Docker Host
    */
   void forceRefreshDockerHostsTable() {
-    // call into Ops to retrieve the latest list of Docker VMs
-
-    // Fake call to create some dummy entries
-    dockerUIManager.createNewFakeDockerHostList();
-
+    dockerUIManager.forceRefreshDockerHostsList();
     refreshDockerHostsTable();
   }
 
