@@ -10,6 +10,7 @@ public class DockerHost {
   public String name;
   public AzureDockerVM hostVM;
   public DockerHostVMState state;
+  public boolean hasPwdLogIn;
   public boolean hasSSHLogIn;
   public Session session;
   public DockerHostOSType hostOSType;
@@ -28,8 +29,9 @@ public class DockerHost {
     }
 
     this.name = copyHost.name;
-    this.hostVM = copyHost.hostVM;
+    this.hostVM = copyHost.hostVM; // this is a safe assignment; hostVM's properties should not be updated
     this.state = copyHost.state;
+    this.hasPwdLogIn = copyHost.hasPwdLogIn;
     this.hasSSHLogIn = copyHost.hasSSHLogIn;
     this.hostOSType = copyHost.hostOSType;
     this.certVault = (copyHost.certVault != null) ? new AzureDockerCertVault(copyHost.certVault) : null;
@@ -45,6 +47,7 @@ public class DockerHost {
     return Objects.equals(this.name, otherHost.name) &&
         this.hostVM == otherHost.hostVM &&
         this.state == otherHost.state &&
+        this.hasPwdLogIn == otherHost.hasPwdLogIn &&
         this.hasSSHLogIn == otherHost.hasSSHLogIn &&
         this.isTLSSecured == otherHost.isTLSSecured &&
         this.hostOSType == otherHost.hostOSType &&
@@ -64,12 +67,12 @@ public class DockerHost {
   }
 
   public enum DockerHostVMState {
-    ACTIVE,
-    CREATING,
-    DELETING,
-    UPDATING,
-    STOPPED,
+    RUNNING,
     STARTING,
-    FAILED
+    STOPPED,
+    DELETING,
+    FAILED,
+    CREATING,
+    UPDATING
   }
 }

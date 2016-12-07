@@ -20,29 +20,45 @@ import static com.microsoft.azure.management.resources.fluentcore.utils.Resource
 
 public class AzureDockerVMOps {
 
-  public static VirtualMachine createDefaultDockerHostVM(Azure azureClient, AzureDockerCertVault certVault) throws AzureDockerException {
+  public static VirtualMachine createDockerHostVM(Azure azureClient, AzureDockerHost dockerHost, ImageReference imgRef) throws AzureDockerException {
+    if (azureClient == null || dockerHost == null || dockerHost.hostVM == null || dockerHost.certVault == null) {
+      throw new AzureDockerException("Unexpected param values; azureClient, dockerHost cannot be null");
+    }
+
+    if ((dockerHost.certVault.vmPwd == null || dockerHost.certVault.vmPwd.isEmpty()) &&
+        (dockerHost.certVault.sshPubKey == null || dockerHost.certVault.sshPubKey.isEmpty())) {
+      throw new AzureDockerException("Unexpected param values; missing password or SSH keys");
+    }
 
     try {
-      VirtualMachine.DefinitionStages.WithLinuxCreate defLinuxCreateStage = azureClient.virtualMachines().define(certVault.hostName)
-          .withRegion(certVault.region)
-          .withNewResourceGroup(certVault.resourceGroupName)
-          .withNewPrimaryNetwork("10.0.0.0/16")
+      VirtualMachine.DefinitionStages.WithLinuxCreate defLinuxCreateStage = azureClient.virtualMachines().define(dockerHost.hostVM.name)
+          .withRegion(dockerHost.hostVM.region)
+          .withNewResourceGroup(dockerHost.hostVM.resourceGroupName)
+          .withNewPrimaryNetwork(dockerHost.hostVM.vnetAddressSpace) //  "10.0.0.0/16"
           .withPrimaryPrivateIpAddressDynamic()
-          .withNewPrimaryPublicIpAddress(certVault.hostName)
-          .withSpecificLinuxImageVersion(KnownDockerVirtualMachineImage.UBUNTU_SERVER_14_04_LTS.imageReference())
-          .withRootUserName(certVault.vmUsername);
+          .withNewPrimaryPublicIpAddress(dockerHost.hostVM.publicIpName)
+          .withSpecificLinuxImageVersion(imgRef)
+          .withRootUserName(dockerHost.certVault.vmUsername);
 
-      VirtualMachine.DefinitionStages.WithCreate defCreateStage =
-          ((certVault.vmPwd != null && !certVault.vmPwd.isEmpty())
-              ? defLinuxCreateStage.withPassword(certVault.vmPwd)
-              : defLinuxCreateStage.withSsh(certVault.sshPubKey))
-              .withSize(VirtualMachineSizeTypes.STANDARD_DS2_V2);
-      if (certVault.availabilitySet != null && !certVault.availabilitySet.isEmpty()) {
-        defCreateStage = defCreateStage.withNewAvailabilitySet(certVault.availabilitySet);
+      if (dockerHost.certVault.sshPubKey != null && !dockerHost.certVault.sshPubKey.isEmpty()) {
+        defLinuxCreateStage = defLinuxCreateStage.withSsh(dockerHost.certVault.sshPubKey);
+      }
+
+      VirtualMachine.DefinitionStages.WithCreate defCreateStage = null;
+      if (dockerHost.certVault.vmPwd != null && !dockerHost.certVault.vmPwd.isEmpty()) {
+        defCreateStage = defLinuxCreateStage.withPassword(dockerHost.certVault.vmPwd);
+      }
+
+      defCreateStage = (defCreateStage != null) ?
+          defCreateStage.withSize(VirtualMachineSizeTypes.STANDARD_DS2_V2) :
+          defLinuxCreateStage.withSize(VirtualMachineSizeTypes.STANDARD_DS2_V2);
+
+      if (dockerHost.hostVM.availabilitySet != null && !dockerHost.hostVM.availabilitySet.isEmpty()) {
+        defCreateStage = defCreateStage.withNewAvailabilitySet(dockerHost.hostVM.availabilitySet);
       }
       //
       defCreateStage =
-          ((certVault.tlsServerCert != null && !certVault.tlsServerCert.isEmpty())
+          ((dockerHost.certVault.tlsServerCert != null && !dockerHost.certVault.tlsServerCert.isEmpty())
               ? defCreateStage.withTag("port", DOCKER_API_PORT_TLS_ENABLED) /* Default Docker host port when TLS is enabled */
               : defCreateStage.withTag("port", DOCKER_API_PORT_TLS_DISABLED)) /* Default Docker host port when TLS is disabled */
               .withTag("hostType", "Docker");
@@ -53,38 +69,11 @@ public class AzureDockerVMOps {
     }
   }
 
-  public static VirtualMachine createDockerHostVM(Azure azureClient, AzureDockerCertVault certVault, ImageReference imgRef) throws AzureDockerException {
-    try {
-      VirtualMachine.DefinitionStages.WithLinuxCreate defLinuxCreateStage = azureClient.virtualMachines().define(certVault.hostName)
-          .withRegion(certVault.region)
-          .withNewResourceGroup(certVault.resourceGroupName)
-          .withNewPrimaryNetwork("10.0.0.0/16")
-          .withPrimaryPrivateIpAddressDynamic()
-          .withNewPrimaryPublicIpAddress(certVault.hostName)
-          .withSpecificLinuxImageVersion(imgRef)
-          .withRootUserName(certVault.vmUsername);
-
-      VirtualMachine.DefinitionStages.WithCreate defCreateStage =
-          ((certVault.vmPwd != null && !certVault.vmPwd.isEmpty())
-              ? defLinuxCreateStage.withPassword(certVault.vmPwd)
-              : defLinuxCreateStage.withSsh(certVault.sshPubKey))
-              .withSize(VirtualMachineSizeTypes.STANDARD_DS2_V2);
-      if (certVault.availabilitySet != null && !certVault.availabilitySet.isEmpty()) {
-        defCreateStage = defCreateStage.withNewAvailabilitySet(certVault.availabilitySet);
-      }
-      defCreateStage =
-          ((certVault.tlsServerCert != null && !certVault.tlsServerCert.isEmpty())
-              ? defCreateStage.withTag("port", "2376") /* Default Docker host port when TLS is enabled */
-              : defCreateStage.withTag("port", "2375")) /* Default Docker host port when TLS is disabled */
-              .withTag("hostType", "Docker");
-
-      return defCreateStage.create();
-    } catch (Exception e) {
-      throw new AzureDockerException(e.getMessage(), e);
-    }
+  public static VirtualMachine createDefaultDockerHostVM(Azure azureClient, AzureDockerHost dockerHost) throws AzureDockerException {
+    return createDockerHostVM(azureClient, dockerHost, KnownDockerVirtualMachineImage.UBUNTU_SERVER_14_04_LTS.imageReference());
   }
 
-  public static AzureDockerVM getDockerVM(Azure azureClient, String resourceGroup, String hostName) {
+  public static AzureDockerVM getDockerHostVM(Azure azureClient, String resourceGroup, String hostName) {
     try {
       VirtualMachine vm = azureClient.virtualMachines().getByGroup(resourceGroup, hostName);
       AzureDockerVM dockerVM = new AzureDockerVM();
@@ -99,6 +88,7 @@ public class AzureDockerVMOps {
       dockerVM.publicIp = publicIp.ipAddress();
       dockerVM.dnsName = publicIp.fqdn();
       dockerVM.vnetName = nicIpConfiguration.getNetwork().name();
+      dockerVM.vnetAddressSpace = nicIpConfiguration.getNetwork().addressSpaces().get(0);
       dockerVM.subnetName = nicIpConfiguration.subnetName();
       dockerVM.networkSecurityGroupName = (nicIpConfiguration.parent().networkSecurityGroupId() != null) ? ResourceUtils.nameFromResourceId(nicIpConfiguration.parent().networkSecurityGroupId()) : null;
       dockerVM.storageAccountName = vm.storageProfile().osDisk().vhd().uri().split("[.]")[0].split("/")[2];
@@ -121,6 +111,16 @@ public class AzureDockerVMOps {
   public static VirtualMachine getVM(Azure azureClient, String resourceGroup, String hostName) throws  AzureDockerException {
     try {
       return azureClient.virtualMachines().getByGroup(resourceGroup, hostName);
+    } catch (Exception e) {
+      throw new AzureDockerException(e.getMessage(), e);
+    }
+  }
+
+  public static VirtualMachine resizeVM(Azure azureClient, String resourceGroup, String hostName, String newSize) throws  AzureDockerException {
+    try {
+      VirtualMachine vm = azureClient.virtualMachines().getByGroup(resourceGroup, hostName);
+
+      return vm.update().withSize(newSize).apply();
     } catch (Exception e) {
       throw new AzureDockerException(e.getMessage(), e);
     }

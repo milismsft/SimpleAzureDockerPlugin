@@ -179,8 +179,6 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
       DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
       String apiURL = (String) tableModel.getValueAt(dockerHostsTable.getSelectedRow(), 4);
 
-      PluginUtil.displayInfoDialog("Selected host", apiURL);
-
       EditableDockerHost editableDockerHost = new EditableDockerHost(dockerUIManager.getDockerHostForURL(apiURL));
 
       AzureEditDockerDialog editDockerDialog = new AzureEditDockerDialog(model.getProject(), editableDockerHost);

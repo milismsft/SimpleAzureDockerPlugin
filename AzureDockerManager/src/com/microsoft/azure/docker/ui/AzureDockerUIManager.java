@@ -1,14 +1,9 @@
 package com.microsoft.azure.docker.ui;
 
-import com.microsoft.azure.docker.resources.AzureDockerSubscription;
-import com.microsoft.azure.docker.resources.AzureDockerVM;
-import com.microsoft.azure.docker.resources.DockerHost;
-import com.microsoft.azure.docker.resources.KnownDockerImages;
+import com.microsoft.azure.docker.resources.*;
 import com.microsoft.azure.management.Azure;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class AzureDockerUIManager {
   public Azure azureMainClient;
@@ -49,19 +44,65 @@ public class AzureDockerUIManager {
     return createNewFakeDockerHost("someHost");
   }
 
+  public List<String> getDockerVMStates() {
+    return Arrays.asList("Running", "Starting", "Stopped", "Deleting", "Failed");
+  }
+
   public DockerHost createNewFakeDockerHost(String name) {
     DockerHost host = new DockerHost();
     host.name = name;
     host.apiUrl = "http://" + name + ".centralus.cloudapp.azure.com";
     host.port = "2375";
     host.isTLSSecured = false;
-    host.state = DockerHost.DockerHostVMState.ACTIVE;
+    host.state = DockerHost.DockerHostVMState.RUNNING;
     host.hostOSType = DockerHost.DockerHostOSType.UBUNTU_SERVER_16;
     host.hostVM = new AzureDockerVM();
     host.hostVM.name = name;
+    host.hostVM.vmSize = "Standard_DS1_v2";
     host.hostVM.region = "centralus";
+    host.hostVM.resourceGroupName = "myresourcegroup";
+    host.hostVM.vnetName = "network1";
+    host.hostVM.vnetAddressSpace = "10.0.0.0/8";
+    host.hostVM.subnetName = "subnet1";
+    host.hostVM.subnetAddressRange = "10.0.0.0/16";
+    host.hostVM.storageAccountName = "sa12313111244";
+    host.hostVM.storageAccountType = "Premium_LSR";
+
+    host.hasPwdLogIn = true;
+    host.hasSSHLogIn = true;
+    host.isTLSSecured = true;
+    host.hasKeyVault = true;
+
+    host.certVault = new AzureDockerCertVault();
+    host.certVault.name = "mykeyvault1";
+    host.certVault.url = host.certVault.name + ".someregion.azure.com";
+    host.certVault.hostName = name;
+    host.certVault.resourceGroupName = "mykeyvault1rg";
+    host.certVault.region = "centralus";
+    host.certVault.userName = "ubuntu";
+    host.certVault.vmPwd = "PasswordGoesHere";
+    host.certVault.sshKey = "id_rsa";
+    host.certVault.sshPubKey = "id_rsa.pub";
+    host.certVault.tlsCACert = "ca.pem";
+    host.certVault.tlsCAKey = "ca-key.pem";
+    host.certVault.tlsClientCert = "cert.pem";
+    host.certVault.tlsClientKey = "key.pem";
+    host.certVault.tlsServerCert = "server.pem";
+    host.certVault.tlsServerKey = "server-key.pem";
 
     return host;
+  }
+
+  public static List<String> getDockerVMStateToActionList(DockerHost.DockerHostVMState currentVMState) {
+    if (currentVMState == DockerHost.DockerHostVMState.RUNNING) {
+      return Arrays.asList(currentVMState.toString(), "Stop", "Restart", "Delete");
+    } else if (currentVMState == DockerHost.DockerHostVMState.STOPPED) {
+      return Arrays.asList(currentVMState.toString(), "Start", "Delete");
+    } else if (currentVMState == DockerHost.DockerHostVMState.FAILED) {
+      return Arrays.asList(currentVMState.toString(), "Stop", "Restart", "Delete");
+    } else {
+      return Arrays.asList(currentVMState.toString());
+    }
   }
 
   public List<DockerHost> createNewFakeDockerHostList() {

@@ -7,11 +7,10 @@ import java.util.Objects;
 @Canonical
 public class AzureDockerCertVault {
   public String name;                   // Azure Key Vault's name
+  public String url;                    // Azure Key Vault's url
   public String hostName;               // name of the host (Docker host) to store the credentials for
-  public String availabilitySet;        // Azure availability set where to create the vault
   public String resourceGroupName;      // Azure resource group where to create the vault
   public String region;                 // Azure location where to create the vault
-  public String servicePrincipalId;     // service principal's client id if user logged in with service principal credentials
   public String userName;               // current user name as logged in via Azure Auth
   public String vmUsername;             // username to be used fro VM (Docker host) login
   public String vmPwd;                  // password to be used for VM (Docker host) login
@@ -24,12 +23,15 @@ public class AzureDockerCertVault {
   public String tlsServerCert;          // see "server.pem"
   public String tlsServerKey;           // see "server-key.pem"
 
+  // TODO: remove this member!!!
+  public String servicePrincipalId;     // service principal's client id if user logged in with service principal credentials
+
   public AzureDockerCertVault() {}
 
   public AzureDockerCertVault(AzureDockerCertVault otherVault) {
     this.name = otherVault.name;
+    this.url = otherVault.url;
     this.hostName = otherVault.hostName;
-    this.availabilitySet = otherVault.availabilitySet;
     this.resourceGroupName = otherVault.resourceGroupName;
     this.region = otherVault.region;
     this.servicePrincipalId = otherVault.servicePrincipalId;
@@ -49,10 +51,8 @@ public class AzureDockerCertVault {
   public boolean equalsTo(AzureDockerCertVault otherVault) {
     return Objects.equals(this.name, otherVault.name) &&
         Objects.equals(this.hostName, otherVault.hostName) &&
-        Objects.equals(this.availabilitySet, otherVault.availabilitySet) &&
         Objects.equals(this.resourceGroupName, otherVault.resourceGroupName) &&
         Objects.equals(this.region, otherVault.region) &&
-        Objects.equals(this.servicePrincipalId, otherVault.servicePrincipalId) &&
         Objects.equals(this.userName, otherVault.userName) &&
         Objects.equals(this.vmUsername, otherVault.vmUsername) &&
         Objects.equals(this.vmPwd, otherVault.vmPwd) &&

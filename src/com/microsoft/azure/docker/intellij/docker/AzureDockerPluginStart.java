@@ -186,7 +186,7 @@ public class AzureDockerPluginStart extends DialogWrapper {
   }
 
   private void onPublishAsAzureDockerContainer() {
-    System.out.println("Publishing as Azure Docker Container");
+    System.out.println("Publishing as Docker on Azure Container");
     setSelectedSubscriptions();
 
     if (dockerUIManager == null || dockerUIManager.subscriptionList == null || dockerUIManager.subscriptionList.size() < 1) {
@@ -202,7 +202,7 @@ public class AzureDockerPluginStart extends DialogWrapper {
 
     AzureSelectDockerWizardModel model = new AzureSelectDockerWizardModel(project, dockerUIManager);
     AzureSelectDockerWizardDialog wizard = new AzureSelectDockerWizardDialog(model);
-    wizard.setTitle("New Azure Docker Container Deployment");
+    wizard.setTitle("New Docker on Azure Container Deployment");
     wizard.show();
 
   }

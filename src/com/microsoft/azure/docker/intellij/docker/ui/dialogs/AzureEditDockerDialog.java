@@ -10,29 +10,25 @@ import org.jdesktop.swingx.JXHyperlink;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListDataListener;
 import java.awt.event.*;
 
 public class AzureEditDockerDialog extends DialogWrapper {
-  private final String defaultTitle = "View Docker Host Details";
+  private final String defaultTitle = "Docker Host Details";
   private JPanel mainPanel;
   private JLabel dockerHostNameLabel;
-  private JCheckBox dockerHostUpdateStatusCheckBox;
-  private JComboBox dockerHostStatusComboBox;
-  private JCheckBox dockerHostEditPortCheckBox;
   private JTextField dockerHostPortTextField;
   private JTabbedPane tabbedPane1;
-  private JCheckBox dockerHostPwdAuthCheckBox;
-  private JCheckBox dockerHostSshAuthCheckBox;
-  private JXHyperlink dockerHostSshUpdateHyperlink;
-  private JXHyperlink dockerHostSshExportHyperlink;
-  private JRadioButton dockerHostOpenDaemonRadioButton;
-  private JRadioButton dockerHostTlsAuthRadioButton;
   private JLabel dockerHostUsernameLabel;
-  private JXHyperlink dockerHostTlsExportHyperlink;
-  private JXHyperlink dockerHostTlsUpdateHyperlink;
-  private JCheckBox dockerHostKeyvaultCheckBox;
-  private JXHyperlink dockerHostKeyvaultUpdateHyperlink;
+  private JLabel dockerHostPwdLoginLabel;
+  private JLabel dockerHostSshLoginLabel;
+  private JLabel dockerHostTlsAuthLabel;
   private JLabel dockerHostKeyvaultLabel;
+  private JXHyperlink dockerHostAuthUpdateHyperlink;
+  private JXHyperlink dockerHostSshExportHyperlink;
+  private JXHyperlink dockerHostTlsExportHyperlink;
   private JLabel dockerHostOSTypeLabel;
   private JLabel dockerHostVMSizeLabel;
   private JLabel dockerHostRGNameLabel;
@@ -41,6 +37,7 @@ public class AzureEditDockerDialog extends DialogWrapper {
   private JLabel dockerHostStorageNameTypeLabel;
   private JLabel dockerHostUrlLabel;
   private JLabel dockerHostLocationLabel;
+  private JLabel dockerHostStatusLabel;
 
   private Action myClickApplyAction;
   private Project project;
@@ -48,9 +45,38 @@ public class AzureEditDockerDialog extends DialogWrapper {
 
   private void initDefaultUIValues() {
     DockerHost dockerHost = editableHost.originalDockerHost;
+
+    // Docker VM info
     dockerHostNameLabel.setText(dockerHost.name);
     dockerHostUrlLabel.setText(dockerHost.apiUrl);
     dockerHostLocationLabel.setText(dockerHost.hostVM.region);
+    dockerHostStatusLabel.setText(dockerHost.state.toString());
+
+    // Docker VM settings
+    dockerHostOSTypeLabel.setText(dockerHost.hostOSType.toString());
+    dockerHostVMSizeLabel.setText(dockerHost.hostVM.vmSize);
+    // TODO: enable resizing of the current VM -> see VirtualMachine::availableSizes() and update.withSize();
+    dockerHostVMSizeLabel.setText(dockerHost.hostVM.resourceGroupName);
+    dockerHostVnetNameAddrLabel.setText(String.format("%s (%s)", dockerHost.hostVM.vnetName, dockerHost.hostVM.vnetAddressSpace));
+    dockerHostSubnetNameAddrLabel.setText(String.format("%s (%s)", dockerHost.hostVM.subnetName, dockerHost.hostVM.subnetAddressRange));
+    dockerHostStorageNameTypeLabel.setText(String.format("%s (%s)", dockerHost.hostVM.storageAccountName, dockerHost.hostVM.storageAccountType));
+
+    // Docker VM log in settings
+    dockerHostUsernameLabel.setText(dockerHost.certVault.userName);
+    dockerHostPwdLoginLabel.setText(dockerHost.hasPwdLogIn ? "Yes" : "No");
+    dockerHostSshLoginLabel.setText(dockerHost.hasSSHLogIn ? "Yes" : "No");
+    dockerHostSshExportHyperlink.setEnabled(dockerHost.hasSSHLogIn);
+
+    // Docker Daemon settings
+    dockerHostTlsAuthLabel.setText(dockerHost.isTLSSecured ? "Using TLS certificates" : "Open/unsecured access");
+    dockerHostTlsExportHyperlink.setEnabled(dockerHost.isTLSSecured);
+    dockerHostPortTextField.setEnabled(true);
+    dockerHostPortTextField.setText(dockerHost.port);
+
+    // Docker Keyvault settings
+    dockerHostKeyvaultLabel.setText(dockerHost.hasKeyVault ? dockerHost.certVault.url : "Not using Key Vault");
+
+    myClickApplyAction.setEnabled(false);
 
   }
 
@@ -60,10 +86,9 @@ public class AzureEditDockerDialog extends DialogWrapper {
     this.project = project;
     this.editableHost = host;
     setModal(true);
-    setTitle("View Docker Host Details");
 
     init();
-    dockerHostSshUpdateHyperlink.addActionListener(new ActionListener() {
+    dockerHostAuthUpdateHyperlink.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         onUpdateLoginCreds();
@@ -75,26 +100,36 @@ public class AzureEditDockerDialog extends DialogWrapper {
         onExportSshKeys();
       }
     });
-    dockerHostTlsUpdateHyperlink.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        onUpdateTlsCerts();
-      }
-    });
     dockerHostTlsExportHyperlink.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         onExportTlsCerts();
       }
     });
-    dockerHostKeyvaultUpdateHyperlink.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        onUpdateKeyvault();
-      }
-    });
+
+    dockerHostPortTextField.getDocument().addDocumentListener(getUpdateDockerPortDocumentListener());
 
     initDefaultUIValues();
+    setTitle("Docker Host Details");
+  }
+
+  private DocumentListener getUpdateDockerPortDocumentListener() {
+    return new DocumentListener() {
+      @Override
+      public void insertUpdate(DocumentEvent e) {
+        onUpdateDockerPort();
+      }
+
+      @Override
+      public void removeUpdate(DocumentEvent e) {
+        onUpdateDockerPort();
+      }
+
+      @Override
+      public void changedUpdate(DocumentEvent e) {
+        onUpdateDockerPort();
+      }
+    };
   }
 
   private void onUpdateLoginCreds() {
@@ -102,24 +137,15 @@ public class AzureEditDockerDialog extends DialogWrapper {
     myClickApplyAction.setEnabled(true);
   }
 
-  private void onExportSshKeys() {
+  private void onUpdateDockerPort() {
     this.setTitle(defaultTitle + " (Updated)");
     myClickApplyAction.setEnabled(true);
   }
 
-  private void onUpdateTlsCerts() {
-    this.setTitle(defaultTitle + " (Updated)");
-    myClickApplyAction.setEnabled(true);
+  private void onExportSshKeys() {
   }
 
   private void onExportTlsCerts() {
-    this.setTitle(defaultTitle + " (Updated)");
-    myClickApplyAction.setEnabled(true);
-  }
-
-  private void onUpdateKeyvault() {
-    this.setTitle(defaultTitle + " (Updated)");
-    myClickApplyAction.setEnabled(true);
   }
 
   @Nullable
@@ -162,6 +188,9 @@ public class AzureEditDockerDialog extends DialogWrapper {
   }
 
   private void doClickApplyAction() {
+    if (doClickApplyValidate() != null) {
+      return;
+    }
   }
 
   private void DialogShaker(ValidationInfo info) {
