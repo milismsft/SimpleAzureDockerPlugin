@@ -142,4 +142,10 @@ public class AzureDockerUIManager {
   public String getDefaultArtifactName(String projectName) {
     return getDefaultName(projectName) + ".war";
   }
+
+  public void updateDockerHost(DockerHost originalDockerHost, DockerHost updatedDockerHost) {
+    try {
+      Thread.sleep(20000);
+    } catch (Exception e) {}
+  }
 }

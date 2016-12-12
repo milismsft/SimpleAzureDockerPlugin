@@ -20,6 +20,7 @@ public class DockerHost {
   public String apiUrl;
   public String port;
   public List<DockerImage> dockerImages;
+  public boolean isUpdating;
 
   public DockerHost() {}
 
@@ -41,6 +42,7 @@ public class DockerHost {
     this.port = copyHost.port;
     this.dockerImages = copyHost.dockerImages;
     this.session = null;
+    this.isUpdating = copyHost.isUpdating;
   }
 
   public boolean equalsTo(DockerHost otherHost) {

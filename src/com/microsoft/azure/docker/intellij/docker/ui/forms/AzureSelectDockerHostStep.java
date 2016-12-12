@@ -148,7 +148,7 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   private void onAddNewDockerHostAction() {
     AzureNewDockerWizardModel newDockerHostModel = new AzureNewDockerWizardModel(model.getProject(), dockerUIManager);
     AzureNewDockerWizardDialog wizard = new AzureNewDockerWizardDialog(newDockerHostModel);
-    wizard.setTitle("Create a new Docker VM");
+    wizard.setTitle("Create a Docker Host");
     wizard.show();
 
     if (wizard.getExitCode() == 0) {
@@ -181,7 +181,7 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
 
       EditableDockerHost editableDockerHost = new EditableDockerHost(dockerUIManager.getDockerHostForURL(apiURL));
 
-      AzureEditDockerDialog editDockerDialog = new AzureEditDockerDialog(model.getProject(), editableDockerHost);
+      AzureEditDockerDialog editDockerDialog = new AzureEditDockerDialog(model.getProject(), editableDockerHost, dockerUIManager);
       editDockerDialog.show();
 
       if (editDockerDialog.getExitCode() == 0) {
@@ -245,19 +245,19 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
   @Override
   public ValidationInfo doValidate() {
     if (dockerImageName.getText() == null || dockerImageName.getText().equals("")){
-      ValidationInfo info = new ValidationInfo("Please name your Docker image", dockerImageName);
+      ValidationInfo info = new ValidationInfo("Missing Docker image name", dockerImageName);
       model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
 
     if (artifactPath.getText() == null || artifactPath.getText().equals("")){
-      ValidationInfo info = new ValidationInfo("Please select the artifact to be published", artifactPath);
+      ValidationInfo info = new ValidationInfo("Missing the artifact to be published", artifactPath);
       model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }
 
     if (dockerHostsTableSelection == null && !model.dockerImageDescription.hasNewDockerHost){
-      ValidationInfo info = new ValidationInfo("Please select a Docker host", dockerHostsTable);
+      ValidationInfo info = new ValidationInfo("No Docker host has been selected", dockerHostsTable);
       model.getSelectDockerWizardDialog().DialogShaker(info);
       return info;
     }

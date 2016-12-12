@@ -2,16 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7bfd3c2-7c08-460f-a555-d9deaa58daab" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerLoginCredsDialog.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerLoginCredsDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerSshKeysDialog.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerSshKeysDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerTlsKeysDialog.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerTlsKeysDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureUpdateDockerHostDialog.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureUpdateDockerHostDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/microsoft/intellij/helpers/IDEHelperImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AzureDockerOps/com/microsoft/azure/docker/ops/AzureDockerCertVaultOps.class" afterPath="$PROJECT_DIR$/out/production/AzureDockerOps/com/microsoft/azure/docker/ops/AzureDockerCertVaultOps.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$1.class" afterPath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$2.class" afterPath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$3.class" afterPath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$4.class" afterPath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$ClickApplyAction.class" afterPath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog$ClickApplyAction.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.class" afterPath="$PROJECT_DIR$/out/production/SimpleAzureDockerPlugin/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/AzureDockerUIManager.java" afterPath="$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/AzureDockerUIManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerVMOps.java" afterPath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerVMOps.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerCertVault.java" afterPath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerCertVault.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerVM.java" afterPath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerVM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerCertVaultOps.java" afterPath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerCertVaultOps.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerHost.java" afterPath="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerHost.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/AzureDockerPluginStart.java" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/AzureDockerPluginStart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureSelectDockerWizardModel.java" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureSelectDockerWizardModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.form" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardModel.java" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.java" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.form" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.form" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.java" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.form" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.java" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.java" afterPath="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.java" />
     </list>
     <ignored path="SimpleAzureDockerPlugin.iws" />
@@ -34,18 +50,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AzureEditDockerDialog.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AzureEditDockerDialog.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+            <state relative-caret-position="413">
+              <caret line="283" column="119" selection-start-line="283" selection-start-column="119" selection-end-line="283" selection-end-column="119" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6384#6385#0" expanded="true" />
+                <element signature="e#6419#6420#0" expanded="true" />
+                <element signature="e#6569#6570#0" expanded="true" />
+                <element signature="e#6605#6606#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IDEHelperImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/microsoft/intellij/helpers/IDEHelperImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-411">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,21 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AzureDockerVMOps.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerVMOps.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AzureDockerUIManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/AzureDockerUIManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="77" column="69" selection-start-line="77" selection-start-column="69" selection-end-line="77" selection-end-column="69" />
+            <state relative-caret-position="218">
+              <caret line="129" column="43" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -76,38 +91,8 @@
       <file leaf-file-name="DockerHost.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerHost.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="22" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AzureDockerVM.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerVM.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AzureDockerHost.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerHost.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AzureDockerCertVault.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerCertVault.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+            <state relative-caret-position="200">
+              <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -150,27 +135,37 @@
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardDialog.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureConfigureDockerContainerStep.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureConfigureDockerContainerStep.form" />
-        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerVMSettingStep.java" />
         <option value="$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/AzureCreateDockerImageDescription.java" />
         <option value="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerSubscription.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerVMSettingStep.form" />
-        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardModel.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.java" />
-        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.form" />
-        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.form" />
         <option value="$PROJECT_DIR$/src/com/microsoft/intellij/util/PluginUtil.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureSelectDockerWizardDialog.java" />
         <option value="$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/EditableDockerHost.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.form" />
-        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureSelectDockerWizardModel.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/AzureDockerPluginStart.java" />
         <option value="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerCertVault.java" />
         <option value="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerVM.java" />
-        <option value="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerHost.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.form" />
         <option value="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerVMOps.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerSshKeysDialog.form" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerTlsKeysDialog.form" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerSshKeysDialog.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerTlsKeysDialog.java" />
+        <option value="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerCertVaultOps.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerLoginCredsDialog.form" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerLoginCredsDialog.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardModel.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.form" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.form" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureUpdateDockerHostDialog.form" />
+        <option value="$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerHost.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureUpdateDockerHostDialog.java" />
+        <option value="$PROJECT_DIR$/src/com/microsoft/intellij/helpers/IDEHelperImpl.java" />
         <option value="$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/AzureDockerUIManager.java" />
         <option value="$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.java" />
       </list>
@@ -219,7 +214,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -318,6 +315,54 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; IntelliJ IDEA IU-162.2032.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; IntelliJ IDEA IU-162.2032.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="SimpleAzureDockerPlugin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -337,6 +382,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="microsoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="intellij" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microsoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="intellij" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microsoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="intellij" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -394,10 +495,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="docker" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AzureDockerPluginStart" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -470,10 +567,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="forms" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AzureViewDockerHostsDialog" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -636,11 +729,137 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
+              <option name="myItemId" value="dialogs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AzureConfigureDockerContainerStep" />
+              <option name="myItemId" value="AzureUpdateDockerHostDialog" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microsoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="intellij" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dialogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AzureExportDockerTlsKeysDialog" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microsoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="intellij" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dialogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AzureExportDockerSshKeysDialog" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleAzureDockerPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microsoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="intellij" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dialogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AzureEditDockerLoginCredsDialog" />
               <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -812,8 +1031,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -828,8 +1045,8 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="VirtualMa&#9;FILE&#9;jar:///Volumes/SharedDisk/workspace/ideau/SimpleAzureDockerPlugin/lib/azure-mgmt-compute-1.0.0-beta3.jar!/com/microsoft/azure/management/compute/VirtualMachine.class&#10;getcurrentproj&#9;PSI&#9;JAVA://com.intellij.projectImport.ProjectImportBuilder#getCurrentProject" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="131" />
+    <property name="SearchEverywhereHistoryKey" value="sleep&#9;PSI&#9;JAVA://java.lang.Thread#sleep&#10;VirtualMa&#9;FILE&#9;jar:///Volumes/SharedDisk/workspace/ideau/SimpleAzureDockerPlugin/lib/azure-mgmt-compute-1.0.0-beta3.jar!/com/microsoft/azure/management/compute/VirtualMachine.class&#10;getcurrentproj&#9;PSI&#9;JAVA://com.intellij.projectImport.ProjectImportBuilder#getCurrentProject" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="98" />
   </component>
   <component name="RunManager" selected="Plugin.Plugin">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -1301,15 +1518,16 @@
       <workItem from="1479768366420" duration="1973000" />
       <workItem from="1479841593861" duration="24732000" />
       <workItem from="1480976226468" duration="24863000" />
+      <workItem from="1481162452845" duration="28217000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174760000" />
+    <option name="totallyTimeSpent" value="202977000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1326,6 +1544,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16239317" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293124" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1336,7 +1555,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293124" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1380,14 +1598,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardDialog.java</url>
-          <line>73</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
@@ -1397,86 +1607,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/intellij/ui/util/UIUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/fileChooser/FileChooserDescriptorFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/ide/IdeEventQueue.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="127" column="46" selection-start-line="127" selection-start-column="46" selection-end-line="127" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/KnownDockerVirtualMachineImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerVMSetupScriptsForUbuntu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-570">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerVMSettingStep.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerVMSettingStep.form" />
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerSubscription.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/AzureDockerPluginStart.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/intellij/util/PluginUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/SimpleAzureDockerPluginMain.java">
@@ -1495,33 +1628,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/EditableDockerHost.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#827#828#0" expanded="false" />
-            <element signature="e#891#892#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.form">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/javax/swing/ComboBoxModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1557,14 +1667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerCertVaultOps.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureOSHost.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1593,7 +1695,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1601,7 +1702,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1609,55 +1709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="63" column="46" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#13419#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.form">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.form">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-487">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-97">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardStep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1681,14 +1732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-52">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2190">
-          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1717,53 +1760,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/AzureDockerPluginStart.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="235" column="0" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerCertVault.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.form">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerHost.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerVM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1784,20 +1784,243 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerCertVault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/ui/DialogWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="966" column="0" selection-start-line="965" selection-start-column="0" selection-end-line="966" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerTlsKeysDialog.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/intellij/util/PluginUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerSshKeysDialog.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/ops/AzureDockerCertVaultOps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="355" column="0" selection-start-line="355" selection-start-column="0" selection-end-line="355" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.form">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerLoginCredsDialog.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/AzureDockerVM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerLoginCredsDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardStep.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerHostStep.form">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.form">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureUpdateDockerHostDialog.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureSelectDockerHostStep.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="183" column="128" selection-start-line="183" selection-start-column="128" selection-end-line="183" selection-end-column="128" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="30" />
+          <folding>
+            <element signature="e#2356#2357#0" expanded="true" />
+            <element signature="e#2403#2404#0" expanded="true" />
+            <element signature="e#2860#2861#0" expanded="true" />
+            <element signature="e#2890#2891#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/forms/AzureNewDockerLoginStep.form">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerSshKeysDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="70" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/EditableDockerHost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="324" column="23" selection-start-line="324" selection-start-column="23" selection-end-line="324" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureExportDockerTlsKeysDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="68" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureUpdateDockerHostDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-216">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1123#1124#0" expanded="true" />
+            <element signature="e#1153#1154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/AzureNewDockerWizardDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/microsoft/intellij/helpers/IDEHelperImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-411">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AzureDockerManager/src/com/microsoft/azure/docker/ui/AzureDockerUIManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="77" column="69" selection-start-line="77" selection-start-column="69" selection-end-line="77" selection-end-column="69" />
+        <state relative-caret-position="218">
+          <caret line="129" column="43" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AzureDockerOps/src/com/microsoft/azure/docker/resources/DockerHost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/microsoft/azure/docker/intellij/docker/ui/dialogs/AzureEditDockerDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+        <state relative-caret-position="413">
+          <caret line="283" column="119" selection-start-line="283" selection-start-column="119" selection-end-line="283" selection-end-column="119" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#6384#6385#0" expanded="true" />
+            <element signature="e#6419#6420#0" expanded="true" />
+            <element signature="e#6569#6570#0" expanded="true" />
+            <element signature="e#6605#6606#0" expanded="true" />
           </folding>
         </state>
       </provider>

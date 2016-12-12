@@ -21,7 +21,7 @@ public class AzureNewDockerWizardModel extends WizardModel {
   public DockerHost dockerHostDescription;
 
   public AzureNewDockerWizardModel(final Project project, AzureDockerUIManager uiManager) {
-    super("Create a new Docker VM");
+    super("Create a virtual machine as a Docker host");
     this.project = project;
     this.dockerUIManager = uiManager;
 

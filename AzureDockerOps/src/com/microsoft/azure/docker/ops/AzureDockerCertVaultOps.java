@@ -344,10 +344,42 @@ public class AzureDockerCertVaultOps {
     return certVault;
   }
 
-  public static void saveToLocalFiles(String localPath, AzureDockerCertVault certVault) throws AzureDockerException {
+  public static void saveAllCertsToLocalDirectory(String localPath, AzureDockerCertVault certVault) throws AzureDockerException {
     try {
       if(certVault.sshKey != null)         { FileWriter file = new FileWriter(localPath + "/id_rsa");         file.write(certVault.sshKey);         file.close();}
       if(certVault.sshPubKey != null)      { FileWriter file = new FileWriter(localPath + "/id_rsa.pub");     file.write(certVault.sshPubKey);      file.close();}
+      if(certVault.tlsCACert != null)      { FileWriter file = new FileWriter(localPath + "/ca.pem");         file.write(certVault.tlsCACert);      file.close();}
+      if(certVault.tlsCAKey != null)       { FileWriter file = new FileWriter(localPath + "/ca-key.pem");     file.write(certVault.tlsCACert);      file.close();}
+      if(certVault.tlsClientCert != null)  { FileWriter file = new FileWriter(localPath + "/cert.pem");       file.write(certVault.tlsClientCert);  file.close();}
+      if(certVault.tlsClientKey != null)   { FileWriter file = new FileWriter(localPath + "/key.pem");        file.write(certVault.tlsClientKey);   file.close();}
+      if(certVault.tlsServerCert != null)  { FileWriter file = new FileWriter(localPath + "/server.pem");     file.write(certVault.tlsServerCert);  file.close();}
+      if(certVault.tlsServerKey != null)   { FileWriter file = new FileWriter(localPath + "/server-key.pem"); file.write(certVault.tlsServerKey);   file.close();}
+    } catch(Exception e) {
+      throw new AzureDockerException(e.getMessage());
+    }
+  }
+
+  public static void saveSshKeysToLocalDirectory(String localPath, AzureDockerCertVault certVault) throws AzureDockerException {
+    try {
+      if (!Files.isDirectory(Paths.get(localPath))) {
+        // try to create the directory first
+        Files.createDirectories(Paths.get(localPath));
+      }
+
+      if(certVault.sshKey != null)         { FileWriter file = new FileWriter(localPath + "/id_rsa");         file.write(certVault.sshKey);         file.close();}
+      if(certVault.sshPubKey != null)      { FileWriter file = new FileWriter(localPath + "/id_rsa.pub");     file.write(certVault.sshPubKey);      file.close();}
+    } catch(Exception e) {
+      throw new AzureDockerException(e.getMessage());
+    }
+  }
+
+  public static void saveTlsCertsToLocalDirectory(String localPath, AzureDockerCertVault certVault) throws AzureDockerException {
+    try {
+      if (!Files.isDirectory(Paths.get(localPath))) {
+        // try to create the directory first
+        Files.createDirectories(Paths.get(localPath));
+      }
+
       if(certVault.tlsCACert != null)      { FileWriter file = new FileWriter(localPath + "/ca.pem");         file.write(certVault.tlsCACert);      file.close();}
       if(certVault.tlsCAKey != null)       { FileWriter file = new FileWriter(localPath + "/ca-key.pem");     file.write(certVault.tlsCACert);      file.close();}
       if(certVault.tlsClientCert != null)  { FileWriter file = new FileWriter(localPath + "/cert.pem");       file.write(certVault.tlsClientCert);  file.close();}

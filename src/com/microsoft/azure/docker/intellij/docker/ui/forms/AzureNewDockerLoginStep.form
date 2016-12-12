@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="rootConfigureContainerPanel" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="695" height="392"/>
+      <xy x="20" y="20" width="548" height="458"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -13,20 +13,20 @@
           <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="68cd5" class="javax.swing.JRadioButton" binding="importFromAzureKeyRadioButton" default-binding="true">
+      <component id="68cd5" class="javax.swing.JRadioButton" binding="dockerHostImportKeyvaultCredsRadioButton">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Import from Azure Key Vault:"/>
+          <text value="Import credentials from Azure Key Vault:"/>
         </properties>
       </component>
-      <component id="e67e1" class="javax.swing.JRadioButton" binding="createNewLogInRadioButton" default-binding="true">
+      <component id="e67e1" class="javax.swing.JRadioButton" binding="dockerHostNewCredsRadioButton">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Create new log in credentials"/>
+          <text value="New log in credentials"/>
         </properties>
       </component>
       <tabbedpane id="f2c26" binding="tabbedPane1" default-binding="true">
@@ -38,7 +38,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="affef" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="affef" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="VM Credentials"/>
@@ -54,7 +54,7 @@
                   <text value="User name:"/>
                 </properties>
               </component>
-              <component id="8771c" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+              <component id="8771c" class="javax.swing.JTextField" binding="dockerHostUsernameTextField">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -62,62 +62,92 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="d58f7" class="javax.swing.JRadioButton" binding="useSSHCertificatesRadioButton" default-binding="true">
+              <component id="d58f7" class="javax.swing.JRadioButton" binding="dockerHostUseSshRadioButton">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Use SSH certificates:"/>
                 </properties>
               </component>
-              <component id="21b56" class="javax.swing.JRadioButton" binding="autoGenerateRadioButton" default-binding="true">
+              <component id="21b56" class="javax.swing.JRadioButton" binding="dockerHostAutoSshRadioButton">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Auto-generate"/>
                 </properties>
               </component>
-              <component id="5b188" class="javax.swing.JRadioButton" binding="importFromDirectoryRadioButton" default-binding="true">
+              <component id="5b188" class="javax.swing.JRadioButton" binding="dockerHostImportSshRadioButton">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Import from directory:"/>
                 </properties>
               </component>
-              <component id="9aa90" class="javax.swing.JRadioButton" binding="useAPasswordToRadioButton" default-binding="true">
+              <component id="9aa90" class="javax.swing.JRadioButton" binding="dockerHostUsePwdRadioButton">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Use a password to login:"/>
+                  <text value="Use a password to log in:"/>
                 </properties>
               </component>
-              <component id="efb71" class="com.intellij.openapi.ui.TextFieldWithBrowseButton">
+              <component id="efb71" class="com.intellij.openapi.ui.TextFieldWithBrowseButton" binding="dockerHostImportBrowseTextField">
                 <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="52a13" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+              <vspacer id="664c">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <component id="67556" class="javax.swing.JPasswordField" binding="dockerHostFirstPwdField">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="7dc36" class="javax.swing.JPasswordField" binding="dockerHostSecondPwdField">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="8c8c1" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Re-type your password:"/>
+                </properties>
+              </component>
+              <component id="323bb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
                 </properties>
               </component>
-              <vspacer id="664c">
+              <component id="83a3a" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
-              </vspacer>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="fb169" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="fb169" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Docker Daemon Access"/>
@@ -125,33 +155,33 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="40f7a" class="javax.swing.JRadioButton" binding="unsecuredAccessToTheRadioButton" default-binding="true">
+              <component id="40f7a" class="javax.swing.JRadioButton" binding="dockerHostNoTlsRadioButton">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Unsecured access to the Docker daemond"/>
+                  <text value="Unsecured access to the Docker daemon"/>
                 </properties>
               </component>
-              <component id="be4a5" class="javax.swing.JRadioButton" binding="enableTLSSecuredAccessRadioButton" default-binding="true">
+              <component id="be4a5" class="javax.swing.JRadioButton" binding="dockerHostEnableTlsRadioButton">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Enable TLS secured access"/>
                 </properties>
               </component>
-              <component id="5b66d" class="javax.swing.JRadioButton" binding="autoGenerateRadioButton1" default-binding="true">
+              <component id="5b66d" class="javax.swing.JRadioButton" binding="dockerHostAutoTlsRadioButton">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Auto-generate"/>
                 </properties>
               </component>
-              <component id="6fd59" class="javax.swing.JRadioButton" binding="importFromDirectoryRadioButton2" default-binding="true">
+              <component id="6fd59" class="javax.swing.JRadioButton" binding="dockerHostImportTlsRadioButton">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Import from directory:"/>
@@ -159,21 +189,21 @@
               </component>
               <component id="3ef1b" class="com.intellij.openapi.ui.TextFieldWithBrowseButton">
                 <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="6433" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Docker daemon TCP port settings:"/>
+                  <text value="Docker daemon port:"/>
                 </properties>
               </component>
-              <component id="5bd67" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+              <component id="5bd67" class="javax.swing.JTextField" binding="dockerDaemonPortTextField">
                 <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -183,22 +213,38 @@
               </component>
               <vspacer id="4f10d">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
+              <component id="8a0c3" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="d8793" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>
       </tabbedpane>
-      <component id="9f995" class="javax.swing.JCheckBox" binding="saveNewSettingsIntoCheckBox" default-binding="true">
+      <component id="9f995" class="javax.swing.JCheckBox" binding="dockerHostSaveCredsCheckBox">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Save new settings into an Azure Key Vault:"/>
+          <text value="Save credentials into a new Azure Key Vault:"/>
         </properties>
       </component>
-      <component id="b8cfe" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="b8cfe" class="javax.swing.JTextField" binding="dockerHostNewKeyvaultTextField">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -206,7 +252,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="e5541" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+      <component id="e5541" class="javax.swing.JComboBox" binding="dockerHostImportKeyvaultComboBox">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

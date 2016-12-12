@@ -29,10 +29,11 @@ public class AzureNewDockerHostStep extends AzureNewDockerWizardStep {
   private JRadioButton dockerHostSelectVNetRadioButton;
   private JComboBox dockerHostSelectVnetComboBox;
   private JComboBox dockerHostSelectSubnetComboBox;
-  private JTextField dockerHostNewVNetTextField;
+  private JTextField dockerHostNewVNetNameTextField;
   private ButtonGroup dockerHostRGGroup;
   private JRadioButton dockerHostNewRGRadioButton;
   private JRadioButton dockerHostSelectRGRadioButton;
+  private JTextField dockerHostNewVNetAddrSpaceTextField;
 
   private AzureNewDockerWizardModel model;
   private AzureDockerUIManager dockerUIManager;
