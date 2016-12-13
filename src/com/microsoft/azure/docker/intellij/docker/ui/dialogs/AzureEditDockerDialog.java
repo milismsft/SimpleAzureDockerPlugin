@@ -1,14 +1,21 @@
 package com.microsoft.azure.docker.intellij.docker.ui.dialogs;
 
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.microsoft.azure.docker.resources.DockerHost;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
 import com.microsoft.azure.docker.ui.EditableDockerHost;
+import com.microsoft.azuretools.authmanage.srvpri.report.IListener;
+import com.microsoft.azuretools.authmanage.srvpri.step.Status;
 import com.microsoft.intellij.helpers.IDEHelperImpl;
 import com.microsoft.intellij.util.PluginUtil;
 import org.jdesktop.swingx.JXHyperlink;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -73,18 +80,18 @@ public class AzureEditDockerDialog extends DialogWrapper {
         dockerHost.certVault.userName + isUpdated :
         dockerHost.certVault.userName
     );
-    dockerHostPwdLoginLabel.setText((isUpdated != null && !editableHost.originalDockerHost.hasPwdLogIn != dockerHost.hasPwdLogIn) ?
+    dockerHostPwdLoginLabel.setText((isUpdated != null && editableHost.originalDockerHost.hasPwdLogIn != dockerHost.hasPwdLogIn) ?
         (dockerHost.hasPwdLogIn ? "Yes" : "No") + isUpdated :
         (dockerHost.hasPwdLogIn ? "Yes" : "No")
     );
-    dockerHostSshLoginLabel.setText((isUpdated != null && !editableHost.originalDockerHost.hasSSHLogIn != dockerHost.hasSSHLogIn) ?
+    dockerHostSshLoginLabel.setText((isUpdated != null && editableHost.originalDockerHost.hasSSHLogIn != dockerHost.hasSSHLogIn) ?
         (dockerHost.hasSSHLogIn ? "Yes" : "No") + isUpdated :
         (dockerHost.hasSSHLogIn ? "Yes" : "No")
     );
     dockerHostSshExportHyperlink.setEnabled(!dockerHost.isUpdating && dockerHost.hasSSHLogIn);
 
     // Docker Daemon settings
-    dockerHostTlsAuthLabel.setText((isUpdated != null && !editableHost.originalDockerHost.isTLSSecured != dockerHost.isTLSSecured) ?
+    dockerHostTlsAuthLabel.setText((isUpdated != null && editableHost.originalDockerHost.isTLSSecured != dockerHost.isTLSSecured) ?
         (dockerHost.hasSSHLogIn ? "Using TLS certificates" : "Open/unsecured access") + isUpdated :
         (dockerHost.hasSSHLogIn ? "Using TLS certificates" : "Open/unsecured access")
     );
@@ -93,7 +100,7 @@ public class AzureEditDockerDialog extends DialogWrapper {
     dockerHostPortTextField.setText(dockerHost.port);
 
     // Docker Keyvault settings
-    dockerHostKeyvaultLabel.setText((isUpdated != null && !editableHost.originalDockerHost.hasKeyVault != dockerHost.hasKeyVault) ?
+    dockerHostKeyvaultLabel.setText((isUpdated != null && editableHost.originalDockerHost.hasKeyVault != dockerHost.hasKeyVault) ?
         (dockerHost.hasKeyVault ? dockerHost.certVault.url : "Not using Key Vault") + isUpdated :
         (dockerHost.hasKeyVault ? dockerHost.certVault.url : "Not using Key Vault")
     );
@@ -259,6 +266,7 @@ public class AzureEditDockerDialog extends DialogWrapper {
     editableHost.updatedDockerHost.isUpdating = true;
     // TODO: disable the UI controls while updating the current Docker host
     initDefaultUIValues(editableHost.updatedDockerHost, " (updating...)");
+    myClickApplyAction.setEnabled(false);
 
     executeUpdate();
 
@@ -274,28 +282,83 @@ public class AzureEditDockerDialog extends DialogWrapper {
 
     AzureEditDockerDialog editDockerHostDialog = this;
 
-    IDEHelperImpl.runInBackground(project, "Updating Docker Host", false, true, "Updating Docker Host: " + editableHost.originalDockerHost.name, new Runnable() {
+    AzureDockerUpdateRunner updateRunner = new AzureDockerUpdateRunner(project, this);
+    updateRunner.queue();
+
+  }
+
+  private void DialogShaker(ValidationInfo info) {
+    PluginUtil.DialogShaker(info, this);
+  }
+
+  private class AzureDockerUpdateTimer implements Runnable {
+    private AzureDockerUpdateRunner updateRunner;
+
+    public AzureDockerUpdateTimer(AzureDockerUpdateRunner updateRunner) {
+      this.updateRunner = updateRunner;
+    }
+
+    @Override
+    public void run() {
+      updateRunner.queue();
+    }
+  }
+
+  private class AzureDockerUpdateRunner extends Task.Backgroundable {
+    public AzureEditDockerDialog editDockerHostDialog;
+    //ProgressIndicator progressIndicator;
+    public AzureDockerUpdateRunner(Project project, AzureEditDockerDialog editDockerHostDialog) {
+      super(project, "Updating Docker Host...", true);
+      this.editDockerHostDialog = editDockerHostDialog;
+    }
+
+    @Override
+    public void onCancel() {
+      editDockerHostDialog.editableHost.originalDockerHost.isUpdating = false;
+      super.onCancel();
+    }
+
+    @Override
+    public void onSuccess() {
+      editDockerHostDialog.editableHost.originalDockerHost.isUpdating = false;
+      super.onSuccess();
+    }
+
+    @Override
+    public void run(@NotNull ProgressIndicator progressIndicator) {
+      try {
+        Thread workThread = new Thread(new Runnable() {
           @Override
           public void run() {
             try {
               // TODO: split this into multiple steps and do simple ops with progress bar for each update
               dockerUIManager.updateDockerHost(editDockerHostDialog.editableHost.originalDockerHost, editDockerHostDialog.editableHost.updatedDockerHost);
-            } catch (Exception e) {
-              String msg = "An error occurred while attempting to update the Docker host settings.\n" + e.getMessage();
-              PluginUtil.displayErrorDialogAndLog("Error", msg, e);
-            }
-            editDockerHostDialog.editableHost.originalDockerHost.isUpdating = false;
-
-            if (editDockerHostDialog.isVisible()) {
-              initDefaultUIValues(editableHost.originalDockerHost, null);
+              Thread.sleep(1);
+            } catch (InterruptedException e) {
+              PluginUtil.displayInfoDialog("Updater", "got stopped");
             }
           }
-        }
-    );
-  }
+        });
 
-  private void DialogShaker(ValidationInfo info) {
-    PluginUtil.DialogShaker(info, this);
+        workThread.start();
+        // timeout after 10 minutes
+        Thread.sleep(360000);
+        workThread.interrupt();
+      } catch (Exception e) {
+        String msg = "An error occurred while attempting to update the Docker host settings: \n" + e.getMessage();
+        PluginUtil.displayErrorDialogAndLog("Error", msg, e);
+      }
+      editDockerHostDialog.editableHost.originalDockerHost.isUpdating = false;
+
+      if (editDockerHostDialog.isVisible()) {
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+          @Override
+          public void run() {
+            initDefaultUIValues(editableHost.originalDockerHost, null);
+          }
+        }, ModalityState.any());
+      }
+    }
   }
 
 }

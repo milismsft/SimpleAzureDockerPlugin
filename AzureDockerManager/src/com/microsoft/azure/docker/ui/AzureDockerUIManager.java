@@ -29,7 +29,7 @@ public class AzureDockerUIManager {
   }
 
   public List<KnownDockerImages> getDefaultDockerImages() {
-    List<KnownDockerImages> dockerImagesList = new ArrayList<>();
+    List<KnownDockerImages> dockerImagesList = new ArrayList<KnownDockerImages>();
     dockerImagesList.add(KnownDockerImages.JBOSS_WILDFLY);
     dockerImagesList.add(KnownDockerImages.TOMCAT8);
 
@@ -106,7 +106,7 @@ public class AzureDockerUIManager {
   }
 
   public List<DockerHost> createNewFakeDockerHostList() {
-    List<DockerHost> hosts = new ArrayList<>();
+    List<DockerHost> hosts = new ArrayList<DockerHost>();
     hosts.add(createNewFakeDockerHost("someDockerHost112"));
     hosts.add(createNewFakeDockerHost("otherDockerHost212"));
     hosts.add(createNewFakeDockerHost("qnyDockerHost132"));
@@ -117,7 +117,7 @@ public class AzureDockerUIManager {
   }
 
   public List<AzureDockerSubscription> createNewFakeSubscriptionList() {
-    List<AzureDockerSubscription> subscriptionList = new ArrayList<>();
+    List<AzureDockerSubscription> subscriptionList = new ArrayList<AzureDockerSubscription>();
 
 
     return subscriptionList;

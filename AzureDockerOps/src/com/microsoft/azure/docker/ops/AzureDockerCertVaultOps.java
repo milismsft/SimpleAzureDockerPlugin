@@ -31,7 +31,7 @@ public class AzureDockerCertVaultOps {
   private static Map<String, String> getSecretsMap(AzureDockerCertVault certVault) {
     if (certVault == null || certVault.hostName == null) return null;
 
-    Map<String, String> secretsMap = new HashMap<>();
+    Map<String, String> secretsMap = new HashMap<String, String>();
     secretsMap.put("vmUsername",     certVault.vmUsername != null ?     certVault.vmUsername : DELETE_SECRET);
     secretsMap.put("vmPwd",          certVault.vmPwd != null ?          certVault.vmPwd : DELETE_SECRET);
     secretsMap.put("sshKey",         certVault.sshKey != null ?         certVault.sshKey : DELETE_SECRET);
