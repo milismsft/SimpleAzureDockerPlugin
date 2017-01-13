@@ -31,9 +31,10 @@ public class AzureNewDockerLoginStep extends AzureNewDockerWizardStep {
   private JTabbedPane tabbedPane1;
   private JPasswordField dockerHostFirstPwdField;
   private JPasswordField dockerHostSecondPwdField;
-  private TextFieldWithBrowseButton dockerHostImportBrowseTextField;
+  private TextFieldWithBrowseButton dockerHostImportSSHBrowseTextField;
   private JCheckBox dockerHostSaveCredsCheckBox;
   private JTextField dockerHostNewKeyvaultTextField;
+  private TextFieldWithBrowseButton dockerHostImportTLSBrowseTextField;
 
   private AzureNewDockerWizardModel model;
   private AzureDockerUIManager dockerUIManager;

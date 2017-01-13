@@ -1,5 +1,6 @@
 package com.microsoft.azure.docker.intellij.docker.ui.forms;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -9,7 +10,8 @@ import com.intellij.ui.table.JBTable;
 import com.intellij.ui.wizard.WizardNavigationState;
 import com.intellij.ui.wizard.WizardStep;
 import com.microsoft.azure.docker.intellij.docker.ui.*;
-import com.microsoft.azure.docker.intellij.docker.ui.dialogs.AzureEditDockerDialog;
+import com.microsoft.azure.docker.intellij.docker.ui.dialogs.AzureEditDockerLoginCredsDialog;
+import com.microsoft.azure.docker.intellij.docker.ui.dialogs.AzureViewDockerDialog;
 import com.microsoft.azure.docker.resources.DockerHost;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
 import com.microsoft.azure.docker.ui.EditableDockerHost;
@@ -116,7 +118,21 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
       }
     });
 
-    dockerHostsPanel = ToolbarDecorator.createDecorator(dockerHostsTable)
+    AnActionButton viewDockerHostsAction = new ToolbarDecorator.ElementActionButton("Details", AllIcons.Actions.Export) {
+      @Override
+      public void actionPerformed(AnActionEvent anActionEvent) {
+        onViewDockerHostAction();
+      }
+    };
+
+    AnActionButton refreshDockerHostsAction = new AnActionButton("Refresh", AllIcons.Actions.Refresh) {
+      @Override
+      public void actionPerformed(AnActionEvent anActionEvent) {
+        onRefreshDockerHostAction();
+      }
+    };
+
+    ToolbarDecorator tableToolbarDecorator = ToolbarDecorator.createDecorator(dockerHostsTable)
         .setAddAction(new AnActionButtonRunnable() {
           @Override
           public void run(AnActionButton button) {
@@ -142,7 +158,34 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
           public boolean isEnabled(AnActionEvent e) {
             return dockerHostsTable.getSelectedRow() != -1;
           }
-        }).disableUpDownActions().createPanel();
+        }).disableUpDownActions()
+        .addExtraActions(viewDockerHostsAction, refreshDockerHostsAction);
+
+
+    dockerHostsPanel = tableToolbarDecorator.createPanel();
+  }
+
+  private void onRefreshDockerHostAction() {
+    PluginUtil.displayInfoDialog("Refresh Docker Host", "some docker host");
+  }
+
+  private void onViewDockerHostAction() {
+    try {
+      DefaultTableModel tableModel = (DefaultTableModel) dockerHostsTable.getModel();
+      String apiURL = (String) tableModel.getValueAt(dockerHostsTable.getSelectedRow(), 4);
+
+      EditableDockerHost editableDockerHost = new EditableDockerHost(dockerUIManager.getDockerHostForURL(apiURL));
+
+      AzureViewDockerDialog viewDockerDialog = new AzureViewDockerDialog(model.getProject(), editableDockerHost, dockerUIManager);
+      viewDockerDialog.show();
+
+      if (viewDockerDialog.getInternalExitCode() == AzureViewDockerDialog.UPDATE_EXIT_CODE) {
+        onEditDockerHostAction();
+      }
+    } catch (Exception e) {
+      String msg = "An error occurred while attempting to view the selected Docker host.\n" + e.getMessage();
+      PluginUtil.displayErrorDialogAndLog("Error", msg, e);
+    }
   }
 
   private void onAddNewDockerHostAction() {
@@ -181,14 +224,14 @@ public class AzureSelectDockerHostStep extends AzureSelectDockerWizardStep {
 
       EditableDockerHost editableDockerHost = new EditableDockerHost(dockerUIManager.getDockerHostForURL(apiURL));
 
-      AzureEditDockerDialog editDockerDialog = new AzureEditDockerDialog(model.getProject(), editableDockerHost, dockerUIManager);
+      AzureEditDockerLoginCredsDialog editDockerDialog = new AzureEditDockerLoginCredsDialog(model.getProject(), editableDockerHost, dockerUIManager);
       editDockerDialog.show();
 
       if (editDockerDialog.getExitCode() == 0) {
         forceRefreshDockerHostsTable();
       }
     } catch (Exception e) {
-      String msg = "An error occurred while attempting to edit selected Docker hosts.\n" + e.getMessage();
+      String msg = "An error occurred while attempting to edit the selected Docker host.\n" + e.getMessage();
       PluginUtil.displayErrorDialogAndLog("Error", msg, e);
     }
   }

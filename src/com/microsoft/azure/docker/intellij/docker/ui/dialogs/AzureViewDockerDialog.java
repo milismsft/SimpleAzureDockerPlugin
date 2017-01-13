@@ -10,9 +10,6 @@ import com.intellij.openapi.ui.ValidationInfo;
 import com.microsoft.azure.docker.resources.DockerHost;
 import com.microsoft.azure.docker.ui.AzureDockerUIManager;
 import com.microsoft.azure.docker.ui.EditableDockerHost;
-import com.microsoft.azuretools.authmanage.srvpri.report.IListener;
-import com.microsoft.azuretools.authmanage.srvpri.step.Status;
-import com.microsoft.intellij.helpers.IDEHelperImpl;
 import com.microsoft.intellij.util.PluginUtil;
 import org.jdesktop.swingx.JXHyperlink;
 import org.jetbrains.annotations.NotNull;
@@ -23,11 +20,14 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.*;
 
-public class AzureEditDockerDialog extends DialogWrapper {
+public class AzureViewDockerDialog extends DialogWrapper {
   private final String defaultTitle = "Docker Host Details";
+  public static final int OK_EXIT_CODE = 0;
+  public static final int CANCEL_EXIT_CODE = 1;
+  public static final int CLOSE_EXIT_CODE = 1;
+  public static final int UPDATE_EXIT_CODE = 3;
   private JPanel mainPanel;
   private JLabel dockerHostNameLabel;
-  private JTextField dockerHostPortTextField;
   private JTabbedPane tabbedPane1;
   private JLabel dockerHostUsernameLabel;
   private JLabel dockerHostPwdLoginLabel;
@@ -46,11 +46,13 @@ public class AzureEditDockerDialog extends DialogWrapper {
   private JLabel dockerHostUrlLabel;
   private JLabel dockerHostLocationLabel;
   private JLabel dockerHostStatusLabel;
+  private JLabel dockerHostPortLabel;
 
   private Action myClickApplyAction;
   private Project project;
   private EditableDockerHost editableHost;
   private AzureDockerUIManager dockerUIManager;
+  private int exitCode;
 
   private void initDefaultUIValues(DockerHost dockerHost, String isUpdated) {
     // Docker VM info
@@ -96,8 +98,11 @@ public class AzureEditDockerDialog extends DialogWrapper {
         (dockerHost.hasSSHLogIn ? "Using TLS certificates" : "Open/unsecured access")
     );
     dockerHostTlsExportHyperlink.setEnabled(!dockerHost.isUpdating && dockerHost.isTLSSecured);
-    dockerHostPortTextField.setEnabled(!dockerHost.isUpdating);
-    dockerHostPortTextField.setText(dockerHost.port);
+
+    dockerHostPortLabel.setText((isUpdated != null && !editableHost.originalDockerHost.port.equals(dockerHost.port)) ?
+            dockerHost.port + isUpdated :
+            dockerHost.port
+    );
 
     // Docker Keyvault settings
     dockerHostKeyvaultLabel.setText((isUpdated != null && editableHost.originalDockerHost.hasKeyVault != dockerHost.hasKeyVault) ?
@@ -105,10 +110,12 @@ public class AzureEditDockerDialog extends DialogWrapper {
         (dockerHost.hasKeyVault ? dockerHost.certVault.url : "Not using Key Vault")
     );
 
-    myClickApplyAction.setEnabled(!editableHost.originalDockerHost.equalsTo(dockerHost));
+    exitCode = CLOSE_EXIT_CODE;
+
+//    myClickApplyAction.setEnabled(!editableHost.originalDockerHost.equalsTo(dockerHost));
   }
 
-  public AzureEditDockerDialog(Project project, EditableDockerHost host, AzureDockerUIManager uiManager) {
+  public AzureViewDockerDialog(Project project, EditableDockerHost host, AzureDockerUIManager uiManager) {
     super(project, true);
 
     this.project = project;
@@ -136,10 +143,8 @@ public class AzureEditDockerDialog extends DialogWrapper {
       }
     });
 
-    dockerHostPortTextField.getDocument().addDocumentListener(getUpdateDockerPortDocumentListener());
-
     initDefaultUIValues(editableHost.originalDockerHost, null);
-    setTitle("Docker Host Details");
+    setTitle(defaultTitle);
 
     dockerHostSshExportHyperlink.addActionListener(new ActionListener() {
       @Override
@@ -156,41 +161,23 @@ public class AzureEditDockerDialog extends DialogWrapper {
     });
   }
 
-  private DocumentListener getUpdateDockerPortDocumentListener() {
-    return new DocumentListener() {
-      @Override
-      public void insertUpdate(DocumentEvent e) {
-        onUpdateDockerPort();
-      }
-
-      @Override
-      public void removeUpdate(DocumentEvent e) {
-        onUpdateDockerPort();
-      }
-
-      @Override
-      public void changedUpdate(DocumentEvent e) {
-        onUpdateDockerPort();
-      }
-    };
-  }
 
   private void onUpdateLoginCreds() {
-    AzureEditDockerLoginCredsDialog editDockerLoginCredsDialog = new AzureEditDockerLoginCredsDialog(project, editableHost.updatedDockerHost);
-    editDockerLoginCredsDialog.show();
+    exitCode = UPDATE_EXIT_CODE;
+    doOKAction();
 
-    if (editDockerLoginCredsDialog.getExitCode() == 0 && !editableHost.originalDockerHost.equalsTo(editableHost.updatedDockerHost)) {
-      initDefaultUIValues(editableHost.updatedDockerHost, " (changed)");
-      this.setTitle(defaultTitle + " (Changed)");
-      myClickApplyAction.setEnabled(true);
-    }
+//    if (editDockerLoginCredsDialog.getExitCode() == 0 && !editableHost.originalDockerHost.equalsTo(editableHost.updatedDockerHost)) {
+//      initDefaultUIValues(editableHost.updatedDockerHost, " (changed)");
+//      this.setTitle(defaultTitle + " (Changed)");
+//      myClickApplyAction.setEnabled(true);
+//    }
   }
 
-  private void onUpdateDockerPort() {
-    editableHost.updatedDockerHost.port = dockerHostPortTextField.getText();
-    this.setTitle(defaultTitle + " (Changed)");
-    myClickApplyAction.setEnabled(true);
-  }
+//  private void onUpdateDockerPort() {
+//    editableHost.updatedDockerHost.port = dockerHostPortTextField.getText();
+//    this.setTitle(defaultTitle + " (Changed)");
+//    myClickApplyAction.setEnabled(true);
+//  }
 
   private void onExportSshKeys() {
     if (editableHost.updatedDockerHost.hasSSHLogIn && editableHost.updatedDockerHost.certVault != null) {
@@ -206,6 +193,10 @@ public class AzureEditDockerDialog extends DialogWrapper {
     }
   }
 
+  public int getInternalExitCode() {
+    return exitCode;
+  }
+
   @Nullable
   @Override
   protected JComponent createCenterPanel() {
@@ -218,147 +209,35 @@ public class AzureEditDockerDialog extends DialogWrapper {
     return null;
   }
 
-  @Nullable
-  @Override
-  protected Action[] createActions() {
-    myClickApplyAction = new ClickApplyAction();
-    myClickApplyAction.setEnabled(false);
-    return new Action[] {getCancelAction(), myClickApplyAction, getOKAction()};
-  }
-
-  protected class ClickApplyAction extends DialogWrapper.DialogWrapperAction {
-    protected ClickApplyAction() {
-      super("Apply");
-    }
-
-    protected void doAction(ActionEvent e) {
-      ValidationInfo info = doClickApplyValidate();
-      if(info != null) {
-        DialogShaker(info);
-      } else {
-        doClickApplyAction();
-      }
-    }
-  }
+//  @Nullable
+//  @Override
+//  protected Action[] createActions() {
+//    myClickApplyAction = new ClickApplyAction();
+//    myClickApplyAction.setEnabled(false);
+//    return new Action[] {getCancelAction(), myClickApplyAction, getOKAction()};
+//  }
+//
+//  protected class ClickApplyAction extends DialogWrapper.DialogWrapperAction {
+//    protected ClickApplyAction() {
+//      super("Apply");
+//    }
+//
+//    protected void doAction(ActionEvent e) {
+//      ValidationInfo info = doClickApplyValidate();
+//      if(info != null) {
+//        DialogShaker(info);
+//      } else {
+//        doClickApplyAction();
+//      }
+//    }
+//  }
 
   @Nullable
   @Override
   protected void doOKAction() {
-    ValidationInfo info = doClickApplyValidate();
-    if(info != null) {
-      DialogShaker(info);
-    } else {
-      super.doOKAction();
-      executeUpdate();
-    }
+    super.doOKAction();
   }
 
-  private ValidationInfo doClickApplyValidate() {
-    // return new ValidationInfo("Apply is not implemented", this.getButton(getOKAction()));
-    return null;
-  }
 
-  private void doClickApplyAction() {
-    if (editableHost.updatedDockerHost.equalsTo(editableHost.originalDockerHost)) {
-      return;
-    }
-
-    editableHost.updatedDockerHost.isUpdating = true;
-    // TODO: disable the UI controls while updating the current Docker host
-    initDefaultUIValues(editableHost.updatedDockerHost, " (updating...)");
-    myClickApplyAction.setEnabled(false);
-
-    executeUpdate();
-
-    editableHost.updatedDockerHost = new DockerHost(editableHost.originalDockerHost);
-  }
-
-  private void executeUpdate() {
-    if (editableHost.updatedDockerHost.equalsTo(editableHost.originalDockerHost)) {
-      return;
-    }
-
-    editableHost.originalDockerHost.isUpdating = true;
-
-    AzureEditDockerDialog editDockerHostDialog = this;
-
-    AzureDockerUpdateRunner updateRunner = new AzureDockerUpdateRunner(project, this);
-    updateRunner.queue();
-
-  }
-
-  private void DialogShaker(ValidationInfo info) {
-    PluginUtil.DialogShaker(info, this);
-  }
-
-  private class AzureDockerUpdateTimer implements Runnable {
-    private AzureDockerUpdateRunner updateRunner;
-
-    public AzureDockerUpdateTimer(AzureDockerUpdateRunner updateRunner) {
-      this.updateRunner = updateRunner;
-    }
-
-    @Override
-    public void run() {
-      updateRunner.queue();
-    }
-  }
-
-  private class AzureDockerUpdateRunner extends Task.Backgroundable {
-    public AzureEditDockerDialog editDockerHostDialog;
-    //ProgressIndicator progressIndicator;
-    public AzureDockerUpdateRunner(Project project, AzureEditDockerDialog editDockerHostDialog) {
-      super(project, "Updating Docker Host...", true);
-      this.editDockerHostDialog = editDockerHostDialog;
-    }
-
-    @Override
-    public void onCancel() {
-      editDockerHostDialog.editableHost.originalDockerHost.isUpdating = false;
-      super.onCancel();
-    }
-
-    @Override
-    public void onSuccess() {
-      editDockerHostDialog.editableHost.originalDockerHost.isUpdating = false;
-      super.onSuccess();
-    }
-
-    @Override
-    public void run(@NotNull ProgressIndicator progressIndicator) {
-      try {
-        Thread workThread = new Thread(new Runnable() {
-          @Override
-          public void run() {
-            try {
-              // TODO: split this into multiple steps and do simple ops with progress bar for each update
-              dockerUIManager.updateDockerHost(editDockerHostDialog.editableHost.originalDockerHost, editDockerHostDialog.editableHost.updatedDockerHost);
-              Thread.sleep(1);
-            } catch (InterruptedException e) {
-              PluginUtil.displayInfoDialog("Updater", "got stopped");
-            }
-          }
-        });
-
-        workThread.start();
-        // timeout after 10 minutes
-        Thread.sleep(360000);
-        workThread.interrupt();
-      } catch (Exception e) {
-        String msg = "An error occurred while attempting to update the Docker host settings: \n" + e.getMessage();
-        PluginUtil.displayErrorDialogAndLog("Error", msg, e);
-      }
-      editDockerHostDialog.editableHost.originalDockerHost.isUpdating = false;
-
-      if (editDockerHostDialog.isVisible()) {
-        ApplicationManager.getApplication().invokeLater(new Runnable() {
-          @Override
-          public void run() {
-            initDefaultUIValues(editableHost.originalDockerHost, null);
-          }
-        }, ModalityState.any());
-      }
-    }
-  }
 
 }

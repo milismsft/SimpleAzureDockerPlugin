@@ -246,8 +246,8 @@ public class AzureDockerPluginStart extends DialogWrapper {
 
       if (selectADLoginRadioButton.isSelected()) {
         dockerUIManager = new AzureDockerUIManager();
-        dockerUIManager.azureMainClient = AzureCredsManager.createSPDefaultAzureClient();
-        List<Subscription> subscriptionList = AzureCredsManager.getSPSubscriptions();
+        dockerUIManager.azureMainClient = AzureCredsManager.createAuthLoginDefaultAzureClient();
+        List<Subscription> subscriptionList = AzureCredsManager.getADSubscriptions();
         dockerUIManager.subscriptionList = new ArrayList<>();
 
         for (Subscription subscription : subscriptionList) {
@@ -260,8 +260,8 @@ public class AzureDockerPluginStart extends DialogWrapper {
 
       } else if (selectSPLoginRadioButton.isSelected()) {
         dockerUIManager = new AzureDockerUIManager();
-        dockerUIManager.azureMainClient = AzureCredsManager.createAuthLoginDefaultAzureClient();
-        List<Subscription> subscriptionList = AzureCredsManager.getADSubscriptions();
+        dockerUIManager.azureMainClient = AzureCredsManager.createSPDefaultAzureClient();
+        List<Subscription> subscriptionList = AzureCredsManager.getSPSubscriptions();
         dockerUIManager.subscriptionList = new ArrayList<>();
 
         for (Subscription subscription : subscriptionList) {
